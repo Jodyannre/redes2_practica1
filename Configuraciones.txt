@@ -1,26 +1,82 @@
 *********************************** SW1 ***********************************
-
-*********************************** SW2 ***********************************
-
-*********************************** SW3 ***********************************
-
---- STP
+--- STP ---
 enable
 configure terminal
 spanning-tree mode rapid-pvst
 end
 
+<TESTEAR CONVERGENCIA>
+
 configure terminal
 spanning-tree mode pvst
 end
 
+sh spanning-tree
+sh spanning-tree summary
+
+*********************************** SW2 ***********************************
+--- STP ---
+enable
+configure terminal
+spanning-tree mode rapid-pvst
+end
+
+<TESTEAR CONVERGENCIA>
+
+configure terminal
+spanning-tree mode pvst
+end
+
+sh spanning-tree
+sh spanning-tree summary
+*********************************** SW3 ***********************************
+
+--- STP ---
+enable
+configure terminal
+spanning-tree mode rapid-pvst
+end
+
+<TESTEAR CONVERGENCIA>
+
+configure terminal
+spanning-tree mode pvst
+end
+
+sh spanning-tree
 sh spanning-tree summary
 
 
 *********************************** SW4 ***********************************
+--- STP ---
+enable
+configure terminal
+spanning-tree mode rapid-pvst
+end
 
+<TESTEAR CONVERGENCIA>
+
+configure terminal
+spanning-tree mode pvst
+end
+
+sh spanning-tree
+sh spanning-tree summary
 *********************************** SW5 ***********************************
+--- STP ---
+enable
+configure terminal
+spanning-tree mode rapid-pvst
+end
 
+<TESTEAR CONVERGENCIA>
+
+configure terminal
+spanning-tree mode pvst
+end
+
+sh spanning-tree
+sh spanning-tree summary
 
 
 *********************************** PC1 *********************************** 
