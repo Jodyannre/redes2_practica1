@@ -55,10 +55,31 @@ Como se puede observar la convergencia fue de 1.5-2s.
 Como se puede apreciar r-pvst es superior a pvst, por lo que se dejo esta confiruacion en toda la topologia.
 
 ---
+***Security-Port***
+Para poder configurar la seguridad de los puertos primero se debe averiguar las mac address que seran permitidas en cada SW. Para ello se accede a las computadoras y con el comando ipconfig se puede visualizar la mac-address.
+![mac-address](./Imagenes/Manual_STP/sec-04.png)
 
+#### Direcciones
+|Mac-Address|SW|Port|
+|---|---|---|
+|00E0.F92B.C930|SW1|f0/1|
+|0001.964B.3555|SW2|f0/1|
+|0060.47AA.A447|SW2|f0/2|
+|00D0.976C.DB46|SW3|f0/1|
+|000D.BD30.082E|SW3|f0/1|
+|00E0.F73A.B209|SW3|f0/3|
+|0002.1738.A63D|SW4|f0/1|
+|0001.C905.530A|SW5|f0/1|
+|00E0.F749.D01A|SW5|f0/2|
 
+Con la mac-address se ingresa al switch a la cual este conectada la computadora y se procede a agregar la dirección a la lista de permitidas por el protocolo.
+![configuracion de port security](./Imagenes/Manual_STP/sec-01.png)
 
+Para verificar que la configuración este correcta se puede utilizar el comando sh run y verifar que las configuraciones esten guardadas o el comando sh port-security int #INTERFACE
+![sh run](./Imagenes/Manual_STP/sec-02.png)
+![sh port-security int](./Imagenes/Manual_STP/sec-03.png)
 
+---
 
 
 
