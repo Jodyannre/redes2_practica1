@@ -33,6 +33,34 @@ Se tienen 9 PC's las cuales se les asigno una IP y su mascara de red, las cuales
 | PC5 | 192.168.36.3 | 255.255.255.0 | 36 | Diversificado36 |
 
 
+***VTP Vlan Trunk Protocol***
+Para conseguir conectividad entre VLAN a través de un enlace troncal entre  switches, las VLAN deben estar configuradas en cada switch. Vlan trunking protocol (VTP) proporciona un medio sencillo de mantener una configuración de VLAN coherente a través de toda la red conmutada.  
+
+Modos de VTP: Un switch puede ser configurado de tres modos diferentes: 
+
+
+  1)Server: Es el modo por defecto. Desde él se pueden crear, eliminar o modificar VLANs. Su cometido es anunciar su configuración al resto de switches del mismo dominio VTP y sincronizar dicha configuración con la de otros servidores, basándose en los mensajes VTP recibidos a través de sus enlaces trunk. Los cambios realizados en un switch en modo servidor se anuncian a todo el dominio VTP.
+  
+  2)Cliente: En este modo no se pueden crear, eliminar o modificar VLANs, tan sólo sincronizar esta información basándose en los mensajes VTP recibidos de servidores en el propio dominio. Un cliente VTP sólo guarda la información de la VLAN para el dominio completo mientras el switch está activado. Un reinicio del switch borra la información de la VLAN.
+ 
+  3)Transparente: Desde este modo tampoco se pueden crear, eliminar o modificar VLANs que afecten a los demás switches. La información VLAN en los switches que trabajen en este modo sólo se puede modificar localmente. Su nombre se debe a que no procesa las actualizaciones VTP recibidas, tan sólo las reenvía a los switches del mismo dominio.
+
+
+
+***VLAN***
+Es un segmento lógico más pequeño dentro de una gran red física cableada. Es un método que permite crear redes que son independientes, aunque están dentro de una misma red física. Un usuario puede disponer de varias redes VLANs dentro de un mismo router.
+
+
+***Modo Trunk***
+Un enlace troncal es un enlace punto a punto, entre dos dispositivos de red, que transporta más de una VLAN (swith a awitch).
+
+
+
+
+***Modo Access***
+Un puerto de acceso (switchport mode access) pertenece únicamente a una VLAN asignada de forma estática (VLAN nativa). La configuración predeterminada suele ser que todos los puertos sean de acceso de la VLAN1. En cambio, un puerto trunk (switchport mode trunk) puede ser miembro de múltiples VLAN (switch a dispositivo final).
+
+
 
 ***Spanning Tree Protocol***
 

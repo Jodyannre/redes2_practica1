@@ -74,6 +74,219 @@ exit
 
 
 
+/******************************************************************************/
+						/**Puertos Trunk SW1**/
+/******************************************************************************/
+
+enable
+config t
+
+interface range f0/3-6
+switchport mode Trunk
+switchport Trunk  allowed vlan all
+description Trunk
+exit
+
+
+/******************************************************************************/
+						/**Puertos Trunk SW2**/
+/******************************************************************************/
+
+enable
+config t
+
+interface range f0/3-4
+switchport mode Trunk
+switchport Trunk  allowed vlan all
+description Trunk
+exit
+
+
+/******************************************************************************/
+						/**Puertos Trunk SW3**/
+/******************************************************************************/
+
+enable
+config t
+
+interface  f0/4
+switchport mode Trunk
+switchport Trunk  allowed vlan all
+description Trunk
+exit
+
+
+interface  f0/6
+switchport mode Trunk
+switchport Trunk  allowed vlan all
+description Trunk
+exit
+
+
+
+/******************************************************************************/
+						/**Puertos Trunk SW4**/
+/******************************************************************************/
+
+enable
+config t
+
+interface range f0/4-7
+switchport mode Trunk
+switchport Trunk  allowed vlan all
+description Trunk
+exit
+
+
+
+/******************************************************************************/
+						/**Puertos Trunk SW5**/
+/******************************************************************************/
+
+enable
+config t
+
+interface range f0/6-7
+switchport mode Trunk
+switchport Trunk  allowed vlan all
+description Trunk
+exit
+
+
+/******************************************************************************/
+						/**Puertos Access SW1**/
+/******************************************************************************/
+
+enable
+config t
+
+interface  f0/1
+switchport mode access
+switchport access   vlan 16
+description access
+exit
+
+
+/******************************************************************************/
+						/**Puertos Access SW2**/
+/******************************************************************************/
+
+enable
+config t
+
+interface  f0/1
+switchport mode access
+switchport access   vlan 16
+description access
+exit
+
+interface  f0/2
+switchport mode access
+switchport access  vlan 16
+description access
+exit
+
+
+
+/******************************************************************************/
+						/**Puertos Access SW3**/
+/******************************************************************************/
+
+enable
+config t
+
+interface  f0/1
+switchport mode access
+switchport access   vlan 36
+description access
+exit
+
+interface  f0/2
+switchport mode access
+switchport access  vlan 16
+description access
+exit
+
+
+
+interface  f0/3
+switchport mode access
+switchport access  vlan 26
+description access
+exit
+
+
+
+/******************************************************************************/
+						/**Puertos Access SW4**/
+/******************************************************************************/
+
+enable
+config t
+
+interface  f0/1
+switchport mode access
+switchport access   vlan 16
+description access
+exit
+
+
+/******************************************************************************/
+						/**Puertos Access SW5**/
+/******************************************************************************/
+
+enable
+config t
+
+interface  f0/1
+switchport mode access
+switchport access   vlan 26
+description access
+exit
+
+interface  f0/2
+switchport mode access
+switchport access  vlan 26
+description access
+exit
+
+*********************************** PC1 ***********************************
+ip: 192.168.16.1
+mascara: 255.255.255.0
+
+*********************************** PC2 ***********************************
+ip: 192.168.16.3
+mascara: 255.255.255.0
+
+*********************************** PC3 ***********************************
+ip: 192.168.36.1
+mascara: 255.255.255.0
+
+*********************************** PC4 ***********************************
+ip: 192.168.36.2
+mascara: 255.255.255.0
+
+*********************************** PC5 ***********************************
+ip: 192.168.36.3
+mascara: 255.255.255.0
+
+*********************************** PC6 ***********************************
+ip: 192.168.16.2
+mascara: 255.255.255.0
+
+*********************************** PC7 ***********************************
+ip: 192.168.26.1
+mascara: 255.255.255.0
+
+*********************************** PC8 ***********************************
+ip: 192.168.26.2
+mascara: 255.255.255.0
+
+*********************************** PC9 ***********************************
+ip: 192.168.26.3
+mascara: 255.255.255.0
+
+
 
 
 
@@ -156,27 +369,6 @@ end
 
 sh spanning-tree
 sh spanning-tree summary
-
-
-*********************************** PC1 *********************************** 
-
-*********************************** PC2 *********************************** 
-
-*********************************** PC3 *********************************** 
-
-*********************************** PC4 *********************************** 
-
-*********************************** PC5 *********************************** 
-
-*********************************** PC6 *********************************** 
-
-*********************************** PC7 *********************************** 
-
-*********************************** PC8 *********************************** 
-
-*********************************** PC9 *********************************** 
-
-
 
 
 
