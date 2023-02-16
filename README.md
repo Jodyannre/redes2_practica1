@@ -45,6 +45,7 @@ Modos de VTP: Un switch puede ser configurado de tres modos diferentes:
  
   3)Transparente: Desde este modo tampoco se pueden crear, eliminar o modificar VLANs que afecten a los demás switches. La información VLAN en los switches que trabajen en este modo sólo se puede modificar localmente. Su nombre se debe a que no procesa las actualizaciones VTP recibidas, tan sólo las reenvía a los switches del mismo dominio.
 
+![image](https://github.com/Jodyannre/redes2_practica1/blob/db400ef200f54dfd8ff667a7dc20bac5a80a0bbc/Imagenes/Manual_STP/VTP.png)
 
 
 ***VLAN***
