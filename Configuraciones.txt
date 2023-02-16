@@ -74,6 +74,184 @@ exit
 
 
 
+/******************************************************************************/
+						/**Puertos Trunk SW1**/
+/******************************************************************************/
+
+enable
+config t
+
+interface range f0/3-6
+switchport mode Trunk
+switchport Trunk  allowed vlan all
+description Trunk
+exit
+
+
+/******************************************************************************/
+						/**Puertos Trunk SW2**/
+/******************************************************************************/
+
+enable
+config t
+
+interface range f0/3-4
+switchport mode Trunk
+switchport Trunk  allowed vlan all
+description Trunk
+exit
+
+
+/******************************************************************************/
+						/**Puertos Trunk SW3**/
+/******************************************************************************/
+
+enable
+config t
+
+interface  f0/4
+switchport mode Trunk
+switchport Trunk  allowed vlan all
+description Trunk
+exit
+
+
+interface  f0/6
+switchport mode Trunk
+switchport Trunk  allowed vlan all
+description Trunk
+exit
+
+
+
+/******************************************************************************/
+						/**Puertos Trunk SW4**/
+/******************************************************************************/
+
+enable
+config t
+
+interface range f0/4-7
+switchport mode Trunk
+switchport Trunk  allowed vlan all
+description Trunk
+exit
+
+
+
+/******************************************************************************/
+						/**Puertos Trunk SW5**/
+/******************************************************************************/
+
+enable
+config t
+
+interface range f0/6-7
+switchport mode Trunk
+switchport Trunk  allowed vlan all
+description Trunk
+exit
+
+
+/******************************************************************************/
+						/**Puertos Access SW1**/
+/******************************************************************************/
+
+enable
+config t
+
+interface  f0/1
+switchport mode access
+switchport access   vlan 16
+description access
+exit
+
+
+/******************************************************************************/
+						/**Puertos Access SW2**/
+/******************************************************************************/
+
+enable
+config t
+
+interface  f0/1
+switchport mode access
+switchport access   vlan 16
+description access
+exit
+
+interface  f0/2
+switchport mode access
+switchport access  vlan 16
+description access
+exit
+
+
+
+/******************************************************************************/
+						/**Puertos Access SW3**/
+/******************************************************************************/
+
+enable
+config t
+
+interface  f0/1
+switchport mode access
+switchport access   vlan 36
+description access
+exit
+
+interface  f0/2
+switchport mode access
+switchport access  vlan 16
+description access
+exit
+
+
+
+interface  f0/3
+switchport mode access
+switchport access  vlan 26
+description access
+exit
+
+
+
+/******************************************************************************/
+						/**Puertos Access SW4**/
+/******************************************************************************/
+
+enable
+config t
+
+interface  f0/1
+switchport mode access
+switchport access   vlan 16
+description access
+exit
+
+
+/******************************************************************************/
+						/**Puertos Access SW5**/
+/******************************************************************************/
+
+enable
+config t
+
+interface  f0/1
+switchport mode access
+switchport access   vlan 26
+description access
+exit
+
+interface  f0/2
+switchport mode access
+switchport access  vlan 26
+description access
+exit
+
+
+
 
 
 
