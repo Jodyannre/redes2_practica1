@@ -1,17 +1,39 @@
-### Grupo #6 | Practica1
-##### Universidad de San Carlos de Guatemala
-##### Facultad de Ingeniería
-##### Escuela de Ciencias y Sistemas
+# **Grupo #6 | Practica1**
+- Universidad de San Carlos de Guatemala
+- Facultad de Ingeniería
+- Escuela de Ciencias y Sistemas
+- Auxiliar: Adriana López
 ##### REDES DE COMPUTADORAS 2 Sección N
 
-    Integrantes:
+## **Integrantes**
+| Carnet    | Nombre |
+| ------    | ------ |
+| **201115018** | **Joel Rodríguez Santos** |
+| 201700644 | Javier Roberto Alfaro Vividor |
+| 201709311 | Edin Emanuel Montenegro Vasquez |
+| 200915080 | Julio Roberto Vasquez Santiago  |
 
-        201115018 - Joel Rodríguez Santos
-        201700644 - Javier Roberto Alfaro Vividor
-        201709311 - Edin Emanuel Montenegro Vasquez
-        200915080 - Julio Roberto Vasquez Santiago 	
         
 ---
+### **Configuracion de PC'S**
+Se tienen 9 PC's las cuales se les asigno una IP y su mascara de red, las cuales se encuentran en la siguiente tabla:
+
+| PC | IP | Mascara | NO. VLAN | NOMBRE VLAN |
+| ------ | ------ | ------ | ------ | ------ |
+| PC1 | 192.168.16.1 | 255.255.255.0 | 16 | Primaria16 |
+| PC2 | 192.168.16.3 | 255.255.255.0 | 16 | Primaria16 |
+| PC6 | 192.168.16.2 | 255.255.255.0 | 16 | Primaria16 |
+| ------ | ------ | ------ | ------ | ------ |
+| PC7 | 192.168.26.1 | 255.255.255.0 | 26 | Basicos26 |
+| PC8 | 192.168.26.2 | 255.255.255.0 | 26 | Basicos26 |
+| PC9 | 192.168.26.3 | 255.255.255.0 | 26 | Basicos26 |
+| ------ | ------ | ------ | ------ | ------ |
+| PC3 | 192.168.36.1 | 255.255.255.0 | 36 | Diversificado36 |
+| PC4 | 192.168.36.2 | 255.255.255.0 | 36 | Diversificado36 |
+| PC5 | 192.168.36.3 | 255.255.255.0 | 36 | Diversificado36 |
+
+
+
 ***Spanning Tree Protocol***
 
 Como primer paso usamos el comando sh spanning-tree en los switches para poder ver la informacion relacionada a Spanning-tree como en la siguiente imagen:
