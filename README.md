@@ -61,7 +61,7 @@ Un enlace troncal es un enlace punto a punto, entre dos dispositivos de red, que
 ***Modo Access***
 Un puerto de acceso (switchport mode access) pertenece únicamente a una VLAN asignada de forma estática (VLAN nativa). La configuración predeterminada suele ser que todos los puertos sean de acceso de la VLAN1. En cambio, un puerto trunk (switchport mode trunk) puede ser miembro de múltiples VLAN (switch a dispositivo final).
 
-
+![image](https://github.com/Jodyannre/redes2_practica1/blob/c8a7418f6e3bc627a98aca2e04839752c8665f9e/Imagenes/Manual_STP/TRUNK-ACCESS.png)
 
 ***Spanning Tree Protocol***
 
