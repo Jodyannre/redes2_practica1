@@ -1,0 +1,408 @@
+
+/******************************************************************************/
+						/**Sw1**/
+/******************************************************************************/
+---VTP Cliente
+enable
+config t
+vtp domain g6
+vtp password g6
+vtp mode Client
+
+/******************************************************************************/
+						/**Sw2**/
+/******************************************************************************/
+---VTP server
+enable
+config t
+vtp domain g6
+vtp password g6
+vtp mode server
+
+
+
+/******************************************************************************/
+						/**Sw3**/
+/******************************************************************************/
+---VTP Cliente
+enable
+config t
+vtp domain g6
+vtp password g6
+vtp mode Client
+
+
+/******************************************************************************/
+						/**Sw4**/
+/******************************************************************************/
+---VTP Cliente
+enable
+config t
+vtp domain g6
+vtp password g6
+vtp mode Client
+
+
+/******************************************************************************/
+						/**Sw5**/
+/******************************************************************************/
+---VTP Cliente
+enable
+config t
+vtp domain g6
+vtp password g6
+vtp mode Client
+
+
+/******************************************************************************/
+						/**Sw1**/
+/******************************************************************************/
+---VLAN
+
+enable
+config t
+
+vlan 16
+name Primaria16
+exit
+
+vlan 26
+name Basicos26
+exit
+
+vlan 36
+name Diversificado36
+exit
+
+
+
+/******************************************************************************/
+						/**Puertos Trunk SW1**/
+/******************************************************************************/
+
+enable
+config t
+
+interface range f0/3-6
+switchport mode Trunk
+switchport Trunk  allowed vlan all
+description Trunk
+exit
+
+
+/******************************************************************************/
+						/**Puertos Trunk SW2**/
+/******************************************************************************/
+
+enable
+config t
+
+interface range f0/3-4
+switchport mode Trunk
+switchport Trunk  allowed vlan all
+description Trunk
+exit
+
+
+/******************************************************************************/
+						/**Puertos Trunk SW3**/
+/******************************************************************************/
+
+enable
+config t
+
+interface  f0/4
+switchport mode Trunk
+switchport Trunk  allowed vlan all
+description Trunk
+exit
+
+
+interface  f0/6
+switchport mode Trunk
+switchport Trunk  allowed vlan all
+description Trunk
+exit
+
+
+
+/******************************************************************************/
+						/**Puertos Trunk SW4**/
+/******************************************************************************/
+
+enable
+config t
+
+interface range f0/4-7
+switchport mode Trunk
+switchport Trunk  allowed vlan all
+description Trunk
+exit
+
+
+
+/******************************************************************************/
+						/**Puertos Trunk SW5**/
+/******************************************************************************/
+
+enable
+config t
+
+interface range f0/6-7
+switchport mode Trunk
+switchport Trunk  allowed vlan all
+description Trunk
+exit
+
+
+/******************************************************************************/
+						/**Puertos Access SW1**/
+/******************************************************************************/
+
+enable
+config t
+
+interface  f0/1
+switchport mode access
+switchport access   vlan 16
+description access
+exit
+
+
+/******************************************************************************/
+						/**Puertos Access SW2**/
+/******************************************************************************/
+
+enable
+config t
+
+interface  f0/1
+switchport mode access
+switchport access   vlan 16
+description access
+exit
+
+interface  f0/2
+switchport mode access
+switchport access  vlan 16
+description access
+exit
+
+
+
+/******************************************************************************/
+						/**Puertos Access SW3**/
+/******************************************************************************/
+
+enable
+config t
+
+interface  f0/1
+switchport mode access
+switchport access   vlan 36
+description access
+exit
+
+interface  f0/2
+switchport mode access
+switchport access  vlan 16
+description access
+exit
+
+
+
+interface  f0/3
+switchport mode access
+switchport access  vlan 26
+description access
+exit
+
+
+
+/******************************************************************************/
+						/**Puertos Access SW4**/
+/******************************************************************************/
+
+enable
+config t
+
+interface  f0/1
+switchport mode access
+switchport access   vlan 16
+description access
+exit
+
+
+/******************************************************************************/
+						/**Puertos Access SW5**/
+/******************************************************************************/
+
+enable
+config t
+
+interface  f0/1
+switchport mode access
+switchport access   vlan 26
+description access
+exit
+
+interface  f0/2
+switchport mode access
+switchport access  vlan 26
+description access
+exit
+
+*********************************** PC1 ***********************************
+ip: 192.168.16.1
+mascara: 255.255.255.0
+
+*********************************** PC2 ***********************************
+ip: 192.168.16.3
+mascara: 255.255.255.0
+
+*********************************** PC3 ***********************************
+ip: 192.168.36.1
+mascara: 255.255.255.0
+
+*********************************** PC4 ***********************************
+ip: 192.168.36.2
+mascara: 255.255.255.0
+
+*********************************** PC5 ***********************************
+ip: 192.168.36.3
+mascara: 255.255.255.0
+
+*********************************** PC6 ***********************************
+ip: 192.168.16.2
+mascara: 255.255.255.0
+
+*********************************** PC7 ***********************************
+ip: 192.168.26.1
+mascara: 255.255.255.0
+
+*********************************** PC8 ***********************************
+ip: 192.168.26.2
+mascara: 255.255.255.0
+
+*********************************** PC9 ***********************************
+ip: 192.168.26.3
+mascara: 255.255.255.0
+
+
+
+
+
+*********************************** SW1 ***********************************
+--- STP ---
+enable
+configure terminal
+spanning-tree mode rapid-pvst
+end
+
+<TESTEAR CONVERGENCIA>
+
+configure terminal
+spanning-tree mode pvst
+end
+
+sh spanning-tree
+sh spanning-tree summary
+
+*********************************** SW2 ***********************************
+--- STP ---
+enable
+configure terminal
+spanning-tree mode rapid-pvst
+end
+
+<TESTEAR CONVERGENCIA>
+
+configure terminal
+spanning-tree mode pvst
+end
+
+sh spanning-tree
+sh spanning-tree summary
+*********************************** SW3 ***********************************
+
+--- STP ---
+enable
+configure terminal
+spanning-tree mode rapid-pvst
+end
+
+<TESTEAR CONVERGENCIA>
+
+configure terminal
+spanning-tree mode pvst
+end
+
+sh spanning-tree
+sh spanning-tree summary
+
+
+*********************************** SW4 ***********************************
+--- STP ---
+enable
+configure terminal
+spanning-tree mode rapid-pvst
+end
+
+<TESTEAR CONVERGENCIA>
+
+configure terminal
+spanning-tree mode pvst
+end
+
+sh spanning-tree
+sh spanning-tree summary
+*********************************** SW5 ***********************************
+--- STP ---
+enable
+configure terminal
+spanning-tree mode rapid-pvst
+end
+
+<TESTEAR CONVERGENCIA>
+
+configure terminal
+spanning-tree mode pvst
+end
+
+sh spanning-tree
+sh spanning-tree summary
+
+
+
+///////////////////////////////PORT-SECURITY////////////////////////////////////
+------------------------------
+MAC-ADDRESS - SWITCH - PORT
+------------------------------
+0002.1738.A63D - SW4 - f0/1
+------------------------------
+00E0.F92B.C930 - SW1 - f0/1
+------------------------------
+0001.C905.530A - SW5 - f0/1
+00E0.F749.D01A - SW5 - f0/2
+------------------------------
+00D0.976C.DB46 - SW3 - f0/1
+000D.BD30.082E - SW3 - f0/2
+00E0.F73A.B209 - SW3 - f0/3
+------------------------------
+0001.964B.3555 - SW2 - f0/1
+0060.47AA.A447 - SW2 - f0/2
+------------------------------
+
+SW##
+conf t
+int #INTERFACE
+switchport port-security
+switchport port-security mac-address #MAC-ADDRESS
+copy running-config startup-config
+
+
+//Para comprobar
+sh run
+sh port-security interface #INTERFACE
+
+////////////////////////////////////////////////////////////////////////////////
