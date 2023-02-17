@@ -51,6 +51,7 @@ Modos de VTP: Un switch puede ser configurado de tres modos diferentes:
 ***VLAN***
 Es un segmento lógico más pequeño dentro de una gran red física cableada. Es un método que permite crear redes que son independientes, aunque están dentro de una misma red física. Un usuario puede disponer de varias redes VLANs dentro de un mismo router.
 
+![image](https://github.com/Jodyannre/redes2_practica1/blob/948a1229c3b97bccfad42d58dc17f375885941c0/Imagenes/Manual_STP/Vlans.png)
 
 ***Modo Trunk***
 Un enlace troncal es un enlace punto a punto, entre dos dispositivos de red, que transporta más de una VLAN (swith a awitch).
