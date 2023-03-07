@@ -1,0 +1,74 @@
+##########################################################################################
+Iniciales:
+
+int f0/1
+switchport mode access
+switchport access vlan 66
+description access
+
+
+RRHH
+==========PC1==========
+ip: 192.168.76.2
+mask: 255.255.255.0
+gw: 192.168.76.1
+
+==========PC2==========
+ip: 192.168.76.3
+mask: 255.255.255.0
+gw: 192.168.76.1
+
+==========PC3==========
+ip: 192.168.76.4
+mask: 255.255.255.0
+gw: 192.168.76.1
+
+
+SOPORTE
+==========PC4==========
+ip: 192.168.86.2
+mask: 255.255.255.0
+gw: 192.168.86.1
+
+
+INFORMATICA
+==========PC5==========
+ip: 192.168.96.2
+mask: 255.255.255.0
+gw: 192.168.96.1
+
+==========PC6==========
+ip: 192.168.96.2
+mask: 255.255.255.0
+gw: 192.168.96.1
+
+===========================================
+==========SW1==========
+int f0/1
+switchport mode access
+description access
+
+int f0/2
+switchport mode access
+description access
+
+int f0/3
+switchport mode access
+description access
+
+WR
+==========SW2==========
+int f0/1
+switchport mode access
+description access
+WR
+
+==========SW3==========
+int f0/1
+switchport mode access
+description access
+
+int f0/2
+switchport mode access
+description access
+
