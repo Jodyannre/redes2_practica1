@@ -1,4 +1,4 @@
-# **Grupo #6 | Practica1**
+# **Grupo #6 | Redes 2**
 - Universidad de San Carlos de Guatemala
 - Facultad de Ingeniería
 - Escuela de Ciencias y Sistemas
