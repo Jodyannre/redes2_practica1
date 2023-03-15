@@ -1,12 +1,6 @@
 ##########################################################################################
 Iniciales:
 
-int f0/1
-switchport mode access
-switchport access vlan 66
-description access
-
-
 RRHH
 ==========PC1==========
 ip: 192.168.76.2
@@ -42,7 +36,7 @@ ip: 192.168.96.2
 mask: 255.255.255.0
 gw: 192.168.96.1
 
-===========================================
+==============================================================
 ==========SW1==========
 int f0/1
 switchport mode access
@@ -56,12 +50,18 @@ int f0/3
 switchport mode access
 description access
 
+int range f0/4-5
+switchport mode trunk
+
 WR
 ==========SW2==========
 int f0/1
 switchport mode access
 description access
 WR
+
+int range f0/5-6
+switchport mode trunk
 
 ==========SW3==========
 int f0/1
@@ -71,4 +71,197 @@ description access
 int f0/2
 switchport mode access
 description access
+
+int f0/3
+switchport mode trunk
+
+int f0/5
+switchport mode trunk
+
+==========MSW1==========
+ena
+conf t
+
+int f0/3
+switchport mode access
+switchport access vlan 16
+description access
+
+int range f0/4-5
+switchport trunk encapsulation dot1q
+switchport trunk allowed vlan 76
+
+//crear vlans ---------------
+vlan 76
+name rrhh
+
+vlan 16
+name ventas
+
+exit
+
+// crear interfaces vlans---------
+int vlan 76
+ip address 192.168.76.1 255.255.255.0
+no shutdown
+exit
+
+int vlan 16
+ip address 1.1.1.1 255.0.0.0
+no shutdown
+exit
+
+do sh run
+==========MSW4==========
+ena
+conf t
+
+int range f0/3
+switchport mode access
+switchport access vlan 16
+description access
+
+
+int range f0/4
+switchport mode access
+switchport access vlan 26
+description access
+
+int range f0/5-6
+switchport trunk encapsulation dot1q
+switchport trunk allowed vlan 86
+
+//crear vlans ---------------
+vlan 16
+name ventas
+
+vlan 26
+name distribucion
+
+vlan 86
+name soporte
+
+exit
+
+// crear interfaces vlans---------
+int vlan 16
+ip address 1.1.1.2 255.0.0.0
+no shutdown
+exit
+
+int vlan 26
+ip address 10.0.0.2 255.0.0.0
+no shutdown
+exit
+
+int vlan 86
+ip address 192.168.86.1 255.255.255.0
+no shutdown
+exit
+
+do sh run
+==========MSW7==========
+ena
+conf t
+
+int f0/4
+switchport mode access
+switchport access vlan 26
+description access
+
+int range f0/3
+switchport trunk encapsulation dot1q
+switchport trunk allowed vlan 96
+
+int range f0/5
+switchport trunk encapsulation dot1q
+switchport trunk allowed vlan 96
+
+//crear vlans ---------------
+vlan 96
+name informatica
+
+vlan 26
+name distribucion
+
+exit
+
+// crear interfaces vlans---------
+int vlan 96
+ip address 192.168.96.1 255.255.255.0
+no shutdown
+exit
+
+int vlan 26
+ip address 10.0.0.1 255.0.0.0
+no shutdown
+exit
+
+do sh run
+
+
+====================================================
+==========ospf==========
+MSW1:
+ip routing
+router ospf 10		// 10 es un ID
+network 1.1.1.0 0.0.0.255 area 10
+network 192.168.76.0 0.0.0.255 area 10
+network 192.168.86.0 0.0.0.255 area 10
+
+sh ip route
+wr
+sh ip ospf neigh
+
+
+MSW4:
+ip routing
+router ospf 10		// 10 es un ID
+network 1.1.1.0 0.0.0.255 area 10
+network 192.168.76.0 0.0.0.255 area 10
+network 192.168.86.0 0.0.0.255 area 10
+
+sh ip route
+wr
+sh ip ospf neigh
+
+
+sh ip route
+wr
+sh ip ospf neigh
+==============================================================
+==========eigrp==========
+
+MSW4:
+conf t
+ip routing
+router eigrp 10
+network 10.10.10.0
+network 192.168.86.0
+network 192.168.96.0
+no auto-summary	//sin esto no conoceran las subredes de la red principal, con esto se publican las redes
+exit
+
+MSW7:
+conf t
+ip routing
+router eigrp 10
+network 10.10.10.0
+network 192.168.86.0
+network 192.168.96.0
+no auto-summary	//sin esto no conoceran las subredes de la red principal, con esto se publican las redes
+exit
+
+
+
+
+
+
+
+
+
+
+
+
+
 
