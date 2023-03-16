@@ -13,6 +13,21 @@
 | 201709311 | Edin Emanuel Montenegro Vasquez |
 | 200915080 | Julio Roberto Vasquez Santiago  |
 
+**INDICE**
+1. [TOPOLOGIA](#CONFIGURACION-GENERAL-DE-TOPOLOGIA-🖧)
+2. [CONFIGURACIONES DE PC](#CONFIGURACIONES-DE-PC-🖥)
+3. [SWITCH MULTILAYER](#SWITCH-MULTILAYER)
+    1. [CONFIGURACION MSW1](#CONFIGURACION-MSW1-🌐)
+    2. [CONFIGURACION MSW4](#CONFIGURACION-MSW4-🌐)
+    3. [CONFIGURACION MSW7](#CONFIGURACION-MSW7-🌐)
+4. [SWITCH CAPA2](#SWITCH-CAPA-2)
+   1. [CONFIGURACION SW1](#CONFIGURACION-SW1-📡) 
+   2. [CONFIGURACION SW2](#CONFIGURACION-SW2-📡)
+   3. [CONFIGURACION SW3](#CONFIGURACION-SW3-📡)
+5. [PROTOCOLOS UTILIZADOS](#PROTOCOLOS-UTILIZADOS-EN-ESTA-TOPOLOGIA)
+6. [COMANDOS PARA VER CONFIGURACIONES](#VER-CONFIGURACIONES-DE-LOS-SWITCHES-⌨️) 
+
+  
 
 # CONFIGURACION GENERAL DE TOPOLOGIA 🖧
 <image
@@ -103,7 +118,16 @@ network 1.1.1.0 0.0.0.255 area 10
 network 192.168.76.0 0.0.0.255 area 10
 network 192.168.86.0 0.0.0.255 area 10
 ```
-
+### CONFIGURACION DE LACP
+```bash
+interface Port-channel1
+switchport trunk allowed vlan 76
+switchport trunk encapsulation dot1q
+exit
+interface range fa0/4-5
+channel-group 1 mode active
+exit
+```
 # CONFIGURACION MSW4 🌐
 ### CREACION DE VLANS
 ```bash	
@@ -166,6 +190,19 @@ network 192.168.96.0
 no auto-summary	#sin esto no conoceran las subredes de la red principal, con esto se publican las redes
 exit
 ```
+### CONFIGURACION DE LACP
+```bash
+interface Port-channel1
+switchport trunk allowed vlan 86
+switchport trunk encapsulation dot1q
+exit
+interface fa0/3
+channel-group 1 mode active
+exit
+interface fa0/6
+channel-group 1 mode active
+exit
+```
 
 # CONFIGURACION MSW7 🌐
 ### CREACION DE VLANS
@@ -213,62 +250,18 @@ network 192.168.96.0
 no auto-summary	#sin esto no conoceran las subredes de la red principal, con esto se publican las redes
 exit
 ```
-### CONFIGURACION DE PROTOCOLO LACP
-# CONFIGURACION SW1 📡
-```bash
-interface Port-channel1
-switchport trunk allowed vlan 76
-switchport mode trunk
-int range fa0/4-5
-channel-group 1 mode active
-```
-# CONFIGURACION MSW1 🌐
-```bash
-interface Port-channel1
-switchport trunk allowed vlan 76
-switchport trunk encapsulation dot1q
-int range fa0/4-5
-channel-group 1 mode active
-```
-# CONFIGURACION SW2 📡
-```bash
-interface Port-channel1
-switchport trunk allowed vlan 86
-switchport mode trunk
-int fa0/3
-channel-group 1 mode active
-int fa0/6
-channel-group 1 mode active
-```
-# CONFIGURACION MSW4 🌐
-```bash
-interface Port-channel1
-switchport trunk allowed vlan 86
-switchport trunk encapsulation dot1q
-int fa0/3
-channel-group 1 mode active
-int fa0/6
-channel-group 1 mode active
-```
-# CONFIGURACION SW3 📡
-```bash
-interface Port-channel1
-switchport trunk allowed vlan 96
-switchport mode trunk
-int fa0/3
-channel-group 1 mode active
-int fa0/5
-channel-group 1 mode active
-```
-# CONFIGURACION MSW7 🌐
+### CONFIGURACION DE LACP
 ```bash
 interface Port-channel1
 switchport trunk allowed vlan 96
 switchport trunk encapsulation dot1q
-int fa0/3
+exit
+interface fa0/3
 channel-group 1 mode active
-int fa0/5
+exit
+intterface fa0/5
 channel-group 1 mode active
+exit
 ```  
 # **SWITCH CAPA 2**
 # CONFIGURACION SW1 📡
@@ -285,6 +278,14 @@ switchport mode trunk
 switchport trunk allowed vlan 76
 exit
 ```
+### CONFIGURACION DE LACP
+```bash
+interface Port-channel1
+switchport trunk allowed vlan 76
+switchport mode trunk
+int range fa0/4-5
+channel-group 1 mode active
+```
 # CONFIGURACION SW2 📡
 ### CONFIGURACION DE PUERTOS
 ```bash
@@ -297,6 +298,19 @@ exit
 interface range f0/5-6
 switchport trunk allowed vlan 86
 switchport mode trunk
+exit
+```
+### CONFIGURACION DE LACP
+```bash
+interface Port-channel1
+switchport trunk allowed vlan 86
+switchport mode trunk
+exit
+interface fa0/3
+channel-group 1 mode active
+exit
+interface fa0/6
+channel-group 1 mode active
 exit
 ```
 # CONFIGURACION SW3 📡
@@ -318,6 +332,26 @@ switchport trunk allowed vlan 96
 switchport mode trunk
 exit
 ```
+### CONFIGURACION DE LACP
+```bash
+interface Port-channel1
+switchport trunk allowed vlan 96
+switchport mode trunk
+exit
+interface fa0/3
+channel-group 1 mode active
+exit
+interface fa0/5
+channel-group 1 mode active
+exit
+```
+# PROTOCOLOS UTILIZADOS EN ESTA TOPOLOGIA
+## OSPF
+OSPF se caracteriza por su capacidad para calcular la ruta más corta para el tráfico de la red, y por su capacidad para soportar redes de gran tamaño.
+## EIGRP
+EIGRP es un protocolo de enrutamiento dinámico que utiliza el algoritmo de distancia vector para determinar la ruta más corta a los destinos de la red.
+## LACP
+El enlace de canal de agrupación (LACP) es un protocolo de enrutamiento que permite a los dispositivos de red agrupar múltiples enlaces de red en un solo enlace de red virtual.
 # VER CONFIGURACIONES DE LOS SWITCHES ⌨️
 ### VER VLANS
 ```bash
