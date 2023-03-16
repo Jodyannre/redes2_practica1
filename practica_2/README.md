@@ -222,7 +222,6 @@ switchport mode trunk
 int range fa0/4-5
 channel-group 1 mode active
 ```
-  
 # CONFIGURACION MSW1 🌐
 ```bash
 interface Port-channel1
@@ -231,7 +230,7 @@ switchport trunk encapsulation dot1q
 int range fa0/4-5
 channel-group 1 mode active
 
- # CONFIGURACION SW2 📡
+# CONFIGURACION SW2 📡
 ```bash
 interface Port-channel1
 switchport trunk allowed vlan 86
@@ -252,7 +251,7 @@ channel-group 1 mode active
 int fa0/6
 channel-group 1 mode active
 ```
- # CONFIGURACION SW3 📡
+# CONFIGURACION SW3 📡
 ```bash
 interface Port-channel1
 switchport trunk allowed vlan 96
