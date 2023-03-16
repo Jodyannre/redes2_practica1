@@ -121,7 +121,7 @@ exit
 interface vlan 26
 ip address 10.0.0.2 255.255.255.0
 no shutdown
-exit
+exit  
 
 vlan 86
 name SOPORTE66
@@ -213,6 +213,65 @@ network 192.168.96.0
 no auto-summary	#sin esto no conoceran las subredes de la red principal, con esto se publican las redes
 exit
 ```
+### CONFIGURACION DE PROTOCOLO LACP
+# CONFIGURACION SW1 📡
+```bash
+interface Port-channel1
+switchport trunk allowed vlan 76
+switchport mode trunk
+int range fa0/4-5
+channel-group 1 mode active
+```
+  
+# CONFIGURACION MSW1 🌐
+```bash
+interface Port-channel1
+switchport trunk allowed vlan 76
+switchport trunk encapsulation dot1q
+int range fa0/4-5
+channel-group 1 mode active
+
+ # CONFIGURACION SW2 📡
+```bash
+interface Port-channel1
+switchport trunk allowed vlan 86
+switchport mode trunk
+int fa0/3
+channel-group 1 mode active
+int fa0/6
+channel-group 1 mode active
+```
+  
+# CONFIGURACION MSW4 🌐
+```bash
+interface Port-channel1
+switchport trunk allowed vlan 86
+switchport trunk encapsulation dot1q
+int fa0/3
+channel-group 1 mode active
+int fa0/6
+channel-group 1 mode active
+```
+ # CONFIGURACION SW3 📡
+```bash
+interface Port-channel1
+switchport trunk allowed vlan 96
+switchport mode trunk
+int fa0/3
+channel-group 1 mode active
+int fa0/5
+channel-group 1 mode active
+```
+# CONFIGURACION MSW7 🌐
+```bash
+interface Port-channel1
+switchport trunk allowed vlan 96
+switchport trunk encapsulation dot1q
+int fa0/3
+channel-group 1 mode active
+int fa0/5
+channel-group 1 mode active
+  
 # **SWITCH CAPA 2**
 # CONFIGURACION SW1 📡
 ### CONFIGURACION DE PUERTOS
