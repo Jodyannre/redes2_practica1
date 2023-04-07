@@ -318,3 +318,155 @@ network 192.168.10.0
 network 192.168.20.0
 no auto-summary	//sin esto no conoceran las subredes de la red principal, con esto se publican las redes
 exit
+
+
+
+#################################################################################
+
+Servidores DHCP y WEB
+
+-------------
+ServerDHCP2
+------------
+Ip: 192.168.86.2
+Mask: 255.255.255.0
+defaul Gw: 192.168.86.1
+
+pool name> soporte16
+Default Gw> 192.168.16.1
+star ip > 192.168.16.3
+
+
+
+MSW0
+
+enable
+conf t
+vlan 86
+name serviceDHCP2
+exit
+
+
+enable
+conf t
+int Gig1/0/2
+switchport mode access
+switchport  access vlan 86
+exit
+
+
+enable
+conf t
+int vlan 16
+ip add 192.168.16.1 255.255.255.0   
+ip helper-address 192.168.86.2  -- ip del servidor dchp2
+exit
+
+enable
+conf t
+int vlan 86
+ip add 192.168.86.1 255.255.255.0   
+
+
+-------------
+ServerDHCP1
+------------
+Ip: 192.168.96.2
+Mask: 255.255.255.0
+defaul Gw: 192.168.96.1
+
+
+pool name> informatica26
+Default Gw> 192.168.26.1
+star ip > 192.168.26.9
+
+MSW0
+
+enable
+conf t
+vlan 96
+name serviceDHCP1
+exit
+
+enable
+conf t
+int Gig1/0/1
+switchport mode access
+switchport  access vlan 96
+exit
+
+enable
+conf t
+int vlan 26
+ip add 192.168.26.1 255.255.255.0   
+ip helper-address 192.168.96.2  -- ip del servidor dchp1
+exit
+
+enable
+conf t
+int vlan 96
+ip add 192.168.96.1 255.255.255.0  
+
+ 
+---------
+Serividor WEB
+---------
+IP: Asigna servidor DHCP2
+
+Index.html
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Redes 2</title>
+<style>
+		table {
+			background-color: lightblue;
+		}
+		td {
+			background-color: white;
+		}
+	</style>
+
+</head>
+<body>
+	<h1>Grupo # 6</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>No.</th>
+      <th>Carnet</th>
+      <th>Nombre</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1</td>
+      <td>201115018</td>
+      <td>Joel Rodríguez Santos</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>201700644</td>
+      <td>Javier Roberto Alfaro Vividor</td>
+    </tr>
+
+<tr>
+      <td>3</td>
+      <td>201709311</td>
+      <td>Edin Emanuel Montenegro Vasquez</td>
+    </tr>
+
+<tr>
+      <td>4</td>
+      <td>200915080</td>
+      <td>Julio Roberto Vasquez Santiago</td>
+    </tr>
+  </tbody>
+</table>
+
+</body>
+</html>
+
+
