@@ -13,19 +13,7 @@
 | 201709311 | Edin Emanuel Montenegro Vasquez |
 | 200915080 | Julio Roberto Vasquez Santiago  |
 
-**INDICE**
-1. [TOPOLOGIA](#CONFIGURACION-GENERAL-DE-TOPOLOGIA-🖧)
-2. [CONFIGURACIONES DE PC](#CONFIGURACIONES-DE-PC-🖥)
-3. [SWITCH MULTILAYER](#SWITCH-MULTILAYER)
-    1. [CONFIGURACION MSW1](#CONFIGURACION-MSW1-🌐)
-    2. [CONFIGURACION MSW4](#CONFIGURACION-MSW4-🌐)
-    3. [CONFIGURACION MSW7](#CONFIGURACION-MSW7-🌐)
-4. [SWITCH CAPA2](#SWITCH-CAPA-2)
-   1. [CONFIGURACION SW1](#CONFIGURACION-SW1-📡) 
-   2. [CONFIGURACION SW2](#CONFIGURACION-SW2-📡)
-   3. [CONFIGURACION SW3](#CONFIGURACION-SW3-📡)
-5. [PROTOCOLOS UTILIZADOS](#PROTOCOLOS-UTILIZADOS-EN-ESTA-TOPOLOGIA)
-6. [COMANDOS PARA VER CONFIGURACIONES](#VER-CONFIGURACIONES-DE-LOS-SWITCHES-⌨️) 
+
 
   
 
@@ -36,315 +24,426 @@
   caption="Topología práctica 2">
 
 # **CONFIGURACIONES DE PC 🖥**
-### PC1 (RRHH) 🖥️
+### PC1 (soporte6) 🖥️
 ```bash
-ip: 192.168.76.2
+ip: 192.168.16.?
 mask: 255.255.255.0
-gw: 192.168.76.1
+gw: 192.168.16.1
 ```
-### PC2 (RRHH) 🖥️
+### PC2 (soporte6) 🖥️
 ```bash
-ip: 192.168.76.3
+ip: 192.168.16.?
 mask: 255.255.255.0
-gw: 192.168.76.1
-```
-
-### PC3 (RRHH) 🖥️
-```bash
-ip: 192.168.76.4
-mask: 255.255.255.0
-gw: 192.168.76.1
+gw: 192.168.16.1
 ```
 
-### LAPTOP (SOPORTE) 🖥️
+### PC3 (soporte6) 🖥️
 ```bash
-ip: 192.168.86.2
+ip: 192.168.16.?
 mask: 255.255.255.0
-gw: 192.168.86.1
+gw: 192.168.16.1
+```
+### PC4 (soporte6) 🖥️
+```bash
+ip: 192.168.16.?
+mask: 255.255.255.0
+gw: 192.168.16.1
+```
+ ---
+    
+    
+### PC1 (informatica6) 🖥️
+```bash
+ip: 192.168.26.?
+mask: 255.255.255.0
+gw: 192.168.26.1
 ```
 
-### PC1 (INFORMATICA) 🖥️
+### PC2 (informatica6) 🖥️
 ```bash
-ip: 192.168.96.2
+ip: 192.168.26.?
 mask: 255.255.255.0
-gw: 192.168.96.1
+gw: 192.168.26.1
 ```
 
-### PC2 (INFORMATICA) 🖥️
+### PC3 (informatica6) 🖥️
 ```bash
-ip: 192.168.96.3
+ip: 192.168.26.?
 mask: 255.255.255.0
-gw: 192.168.96.1
+gw: 192.168.26.1
 ```
+### PC4 (informatica6) 🖥️
+```bash
+ip: 192.168.26.?
+mask: 255.255.255.0
+gw: 192.168.26.1
+```
+    
+# **Conexión entre los edificios**
+    
+# VTP
 
+### configuracion para vtp server
+```conf ter
+vtp domain g6
+vtp password g6
+vtp version 2
+vtp mode server
 
-# **SWITCH MULTILAYER**
-# CONFIGURACION MSW1 🌐
-### CREACION DE VLANS
-```bash	
+sh vtp status		(ver vtp)
+sh vtp password   (ver password)
+sh vlan
+```
+---
+
+**intervlan(principales)**    
+```
 vlan 16
-name VENTAS16
-exit
-interface vlan 16
-ip address 1.1.1.1 255.0.0.0
-no shutdown
-exit
+name SOPORTE6
+    
+vlan 26
+name INFORMATICA6
+```
+    
+    
+**intervlan norte (data center)**
+```
+vlan 36
+name DS_OESTE6
+vlan 46
+name DS_ESTE6
+```
 
+**intervlan sur (server web)**    
+```
+vlan 56
+name SW_OESTE6
+vlan 66
+name SW_ESTE6
+```
+**intervlan central (conector de las 2 LAN)**
+```    
 vlan 76
-name RRHH66
-exit 
-interface vlan 76
-ip address 192.168.76.1 255.255.255.0
-no shutdown
-exit
-```	
-### CONFIGURACION DE PUERTOS
-```bash
-interface f0/3
-switchport trunk encapsulation dot1q
-switchport trunk allowed vlan 16
-exit
+name C_LAN6
+```
+---
+    
 
-interface range f0/4-5
-switchport trunk encapsulation dot1q
-switchport trunk allowed vlan 76
-exit
+# configuracion para vtp client
+
+``` ena
+conf ter
+vtp domain g6
+vtp password g6
+vtp version 2
+vtp mode client
+
+sh vtp status
+sh vtp password
 ```
-### CONFIGURACION DE OSPF
-```bash
-ip routing
-router ospf 10		
-network 1.1.1.0 0.0.0.255 area 10
-network 192.168.76.0 0.0.0.255 area 10
-network 192.168.86.0 0.0.0.255 area 10
-```
-### CONFIGURACION DE LACP
-```bash
-interface Port-channel1
-switchport trunk allowed vlan 76
-switchport trunk encapsulation dot1q
-exit
-interface range fa0/4-5
-channel-group 1 mode active
-exit
-```
-# CONFIGURACION MSW4 🌐
-### CREACION DE VLANS
-```bash	
-vlan 16
-name VENTAS16
-exit
-interface vlan 16
-ip address 1.1.1.1 255.0.0.0
+
+---
+
+
+# MSW0
+**designar interfaces**
+```    
+ena
+conf t
+int vlan 16
+ip address 192.168.16.1 255.255.255.0
 no shutdown
 exit
 
-vlan 26
-name DISTRIBUICION26
-exit 
-interface vlan 26
-ip address 10.0.0.2 255.255.255.0
-no shutdown
-exit  
-
-vlan 86
-name SOPORTE66
-exit 
-interface vlan 86
-ip address 192.168.86.1 255.255.255.0
+int vlan 26
+ip address 192.168.26.1 255.255.255.0
 no shutdown
 exit
-```	
-### CONFIGURACION DE PUERTOS
-```bash
-interface f0/3
-switchport trunk encapsulation dot1q
-switchport trunk allowed vlan 16
-exit
-
-interface f0/4
-switchport trunk encapsulation dot1q
-switchport trunk allowed vlan 26
-exit
-
-interface range f0/5-6
-switchport trunk encapsulation dot1q
-switchport trunk allowed vlan 86
-exit
-```
-### CONFIGURACION DE OSPF
-```bash
-ip routing
-router ospf 10		# 10 es un ID
-network 1.1.1.0 0.0.0.255 area 10
-network 192.168.76.0 0.0.0.255 area 10
-network 192.168.86.0 0.0.0.255 area 10
-```
-### CONFIGURACION DE EIGRP
-```bash
-ip routing
-router eigrp 10
-network 10.10.10.0
-network 192.168.86.0
-network 192.168.96.0
-no auto-summary	#sin esto no conoceran las subredes de la red principal, con esto se publican las redes
-exit
-```
-### CONFIGURACION DE LACP
-```bash
-interface Port-channel1
-switchport trunk allowed vlan 86
-switchport trunk encapsulation dot1q
-exit
-interface fa0/3
-channel-group 1 mode active
-exit
-interface fa0/6
-channel-group 1 mode active
-exit
 ```
 
-# CONFIGURACION MSW7 🌐
-### CREACION DE VLANS
-```bash	
-vlan 26
-name DISTRIBUCION26
-exit
-interface vlan 26
-ip address 10.0.0.1 255.0.0.0
+```
+int vlan 36
+ip address 36.36.36.1 255.0.0.0
 no shutdown
 exit
 
-vlan 96
-name INFORMATICA66
-exit 
-interface vlan 96
-ip address 192.168.96.1 255.255.255.0
+int vlan 46
+ip address 46.46.46.1 255.0.0.0
 no shutdown
 exit
-```	
-### CONFIGURACION DE PUERTOS
-```bash
-interface f0/3
-switchport trunk encapsulation dot1q
-switchport trunk allowed vlan 96
+
+do sh run
+```
+
+**designar el acceso/trunk MSW0**
+MSW0:
+```    
+conf t
+int g1/0/2
+switchport mode trunk
+switchport trunk allowed vlan all
+exit
+sh vlan brief
+WR
+```
+
+
+
+# MSW1
+**designar interfaces**
+```ena
+conf t
+int vlan 16
+ip address 192.168.16.1 255.255.255.0
+no shutdown
 exit
 
-interface f0/4
-switchport trunk encapsulation dot1q
-switchport trunk allowed vlan 26
+int vlan 26
+ip address 192.168.26.1 255.255.255.0
+no shutdown
 exit
 
-interface f0/5
-switchport trunk encapsulation dot1q
-switchport trunk allowed vlan 96
+
+int vlan 36
+ip address 36.36.36.2 255.0.0.0
+no shutdown
 exit
+
+int vlan 56
+ip address 56.56.56.2 255.0.0.0
+no shutdown
+exit
+
+int vlan 76
+ip address 76.76.76.1 255.0.0.0
+no shutdown
+exit
+
+do sh run
 ```
-### CONFIGURACION DE EIGRP
-```bash
-ip routing
-router eigrp 10
-network 10.10.10.0
-network 192.168.86.0
-network 192.168.96.0
-no auto-summary	#sin esto no conoceran las subredes de la red principal, con esto se publican las redes
+
+**designar el acceso/trunk MSW1**
+MSW1:
+```conf t
+
+int g1/0/2
+switchport mode trunk
+switchport trunk allowed vlan all
 exit
+sh vlan brief
+WR
 ```
-### CONFIGURACION DE LACP
-```bash
-interface Port-channel1
-switchport trunk allowed vlan 96
-switchport trunk encapsulation dot1q
+
+
+
+
+# MSW2:
+**designar interfaces**
+```ena
+conf t
+int vlan 16
+ip address 192.168.16.1 255.255.255.0
+no shutdown
 exit
-interface fa0/3
-channel-group 1 mode active
+
+int vlan 26
+ip address 192.168.26.1 255.255.255.0
+no shutdown
 exit
-intterface fa0/5
-channel-group 1 mode active
+
+int vlan 46
+ip address 46.46.46.2 255.0.0.0
+no shutdown
 exit
+
+int vlan 66
+ip address 66.66.66.2 255.0.0.0
+no shutdown
+exit
+
+int vlan 76
+ip address 76.76.76.2 255.0.0.0
+no shutdown
+exit
+
+do sh run
+```
+
+**designar el acceso/trunk MSW2**
+```conf t
+
+int g0/2
+switchport mode trunk
+switchport trunk allowed vlan all
+exit
+sh vlan brief
+WR
+```
+
+    
+    
+# MSW3:
+**designar interfaces**
+```ena
+conf t
+int vlan 16
+ip address 192.168.16.1 255.255.255.0
+no shutdown
+exit
+
+int vlan 26
+ip address 192.168.26.1 255.255.255.0
+no shutdown
+exit
+
+
+int vlan 56
+ip address 56.56.56.1 255.0.0.0
+no shutdown
+exit
+
+int vlan 66
+ip address 66.66.66.1 255.0.0.0
+no shutdown
+exit
+
+do sh run
+```
+
+**designar el acceso/trunk MSW3**
+```conf t
+int g1/0/2
+switchport mode trunk
+switchport trunk allowed vlan all
+exit
+sh vlan brief
+WR
+```
+
+---
+    
+# OSPF
+
+**MSW0(norte)**
+```ip routing
+router ospf 10
+network 36.36.36.0 0.0.0.255 area 10
+network 192.168.16.0 0.0.0.255 area 10
+network 192.168.26.0 0.0.0.255 area 10
+network 46.46.46.0 0.0.0.255 area 10
+```
+
+**MSW1(oeste)**
+```ip routing
+router ospf 10
+network 36.36.36.0 0.0.0.255 area 10
+network 192.168.16.0 0.0.0.255 area 10
+network 192.168.26.0 0.0.0.255 area 10
+network 56.56.56.0 0.0.0.255 area 10
+network 76.76.76.0 0.0.0.255 area 10
+```
+    
+
+**MSW2(este)**
+```ip routing
+router ospf 10
+network 46.46.46.0 0.0.0.255 area 10
+network 192.168.16.0 0.0.0.255 area 10
+network 192.168.26.0 0.0.0.255 area 10
+network 66.66.66.0 0.0.0.255 area 10
+network 76.76.76.0 0.0.0.255 area 10
+```
+    
+
+**MSW3(sur)**
+```ip routing
+router ospf 10
+network 56.56.56.0 0.0.0.255 area 10
+network 192.168.16.0 0.0.0.255 area 10
+network 192.168.26.0 0.0.0.255 area 10
+network 66.66.66.0 0.0.0.255 area 10
+
+sh ip route
+wr
+sh ip ospf neigh
 ```  
-# **SWITCH CAPA 2**
-# CONFIGURACION SW1 📡
-### CONFIGURACION DE PUERTOS
-```bash
-interface range f0/1-3
-description access
-switchport access vlan 76
-switchport mode access
+    
+---
+    
+# EIGRP
+
+**deshabilitar ospf en c/u MSW**
+```ip routing
+no router ospf 10
+```
+    
+**deshabilitar eigrp en c/u MSW**
+```ip routing
+no router eigrp 10
+```
+    
+
+**MSW0(norte)**
+```ip routing
+router eigrp 10
+network 36.36.36.0 0.0.0.255
+network 192.168.16.0 0.0.0.255
+network 192.168.26.0 0.0.0.255
+network 46.46.46.0 0.0.0.255
+no auto-summary	
+exit
+```
+
+
+**MSW1(oeste)**
+```ip routing
+router eigrp 10
+network 36.36.36.0 0.0.0.255
+network 192.168.16.0 0.0.0.255
+network 192.168.26.0 0.0.0.255
+network 56.56.56.0 0.0.0.255
+network 76.76.76.0 0.0.0.255
+no auto-summary	
+exit
+```
+    
+
+**MSW2(este)**
+```ip routing
+router eigrp 10
+network 46.46.46.0 0.0.0.255
+network 192.168.16.0 0.0.0.255
+network 192.168.26.0 0.0.0.255
+network 66.66.66.0 0.0.0.255
+network 76.76.76.0 0.0.0.255
+no auto-summary	
+exit
+```
+    
+**MSW3(sur)**
+```ip routing
+router eigrp 10
+network 56.56.56.0 0.0.0.255
+network 192.168.16.0 0.0.0.255
+network 192.168.26.0 0.0.0.255
+network 66.66.66.0 0.0.0.255
+no auto-summary	
 exit
 
-interface range f0/4-5
-switchport mode trunk
-switchport trunk allowed vlan 76
-exit
-```
-### CONFIGURACION DE LACP
-```bash
-interface Port-channel1
-switchport trunk allowed vlan 76
-switchport mode trunk
-int range fa0/4-5
-channel-group 1 mode active
-```
-# CONFIGURACION SW2 📡
-### CONFIGURACION DE PUERTOS
-```bash
-interface f0/1
-description access
-switchport access vlan 86
-switchport mode access
-exit
+sh ip route
+wr
+```    
+    
+    
+    
+    
+    
+---
+    
+    
+    
+    
 
-interface range f0/5-6
-switchport trunk allowed vlan 86
-switchport mode trunk
-exit
-```
-### CONFIGURACION DE LACP
-```bash
-interface Port-channel1
-switchport trunk allowed vlan 86
-switchport mode trunk
-exit
-interface fa0/3
-channel-group 1 mode active
-exit
-interface fa0/6
-channel-group 1 mode active
-exit
-```
-# CONFIGURACION SW3 📡
-### CONFIGURACION DE PUERTOS
-```bash
-interface range f0/1-2
-description access
-switchport access vlan 96
-switchport mode access
-exit
-
-interface f0/3
-switchport trunk allowed vlan 96
-switchport mode trunk
-exit
-
-interface f0/5
-switchport trunk allowed vlan 96
-switchport mode trunk
-exit
-```
-### CONFIGURACION DE LACP
-```bash
-interface Port-channel1
-switchport trunk allowed vlan 96
-switchport mode trunk
-exit
-interface fa0/3
-channel-group 1 mode active
-exit
-interface fa0/5
-channel-group 1 mode active
-exit
-```
 # PROTOCOLOS UTILIZADOS EN ESTA TOPOLOGIA
 ## OSPF
 OSPF se caracteriza por su capacidad para calcular la ruta más corta para el tráfico de la red, y por su capacidad para soportar redes de gran tamaño.
