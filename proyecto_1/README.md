@@ -561,6 +561,32 @@ switchport trunk allowed vlan 16,26
 shutdown
 no shutdown
 ```
+**MSW5**
+```
+-- hsrp
+interface Vlan16
+standby 1 ip 192.168.16.100
+standby 1 priority 100
+interface Vlan26
+standby 2 ip 192.168.26.100
+standby 2 priority 100
+
+//comando para ver estado
+sh standby brief
+```
+**MSW6**
+```
+-- hsrp
+interface Vlan16
+standby 1 ip 192.168.16.100
+standby 1 priority 110
+standby 1 preempt
+interface Vlan26
+standby 2 ip 192.168.26.100
+standby 2 priority 110
+standby 2 preempt
+```
+
 
 **MSW8**
 ```
@@ -590,6 +616,33 @@ switchport trunk allowed vlan 16,26
 shutdown
 no shutdown
 ```
+**MSW9**
+```
+-- hsrp
+interface Vlan16
+standby 1 ip 192.168.16.100
+standby 1 priority 110
+standby 1 preempt
+interface Vlan26
+standby 2 ip 192.168.26.100
+standby 2 priority 110
+standby 2 preempt
+```
+**MSW10**
+```
+-- hsrp
+interface Vlan16
+standby 1 ip 192.168.16.100
+standby 1 priority 100
+interface Vlan26
+standby 2 ip 192.168.26.100
+standby 2 priority 100
+
+//comando para ver estado
+sh standby brief
+```
+
+
 ---
 # Access
 
