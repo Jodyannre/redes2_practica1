@@ -87,7 +87,7 @@ mask: 255.255.255.0
 gw: 192.168.96.1
 ```
   
-### DHCP1 (Soporte 16) 🖥️
+### DHCP2 (Soporte 16) 🖥️
 ```bash
 ip: 192.168.86.2
 mask: 255.255.255.0
@@ -498,18 +498,23 @@ wr
     
 # DHCP
 **Server DHCP1**
+```
 Pool name: informatica26
 default gw: 192.168.26.1
 start IP: 192.168.26.9
 Mask> 255.255.255.0
 Max number user: 100
-  
+```  
 **Server DHCP2**
+
+```
 Pool name: informatica16
 default gw: 192.168.16.1
 start IP: 192.168.16.3
 Mask> 255.255.255.0
 Max number user: 100
+
+```
 
   
   
