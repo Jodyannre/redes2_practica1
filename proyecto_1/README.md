@@ -1,4 +1,4 @@
-# **Grupo #6 | Practica2**
+# **Grupo #6 | Proyecto 1**
 - Universidad de San Carlos de Guatemala
 - Facultad de Ingeniería
 - Escuela de Ciencias y Sistemas
@@ -115,6 +115,19 @@ sh vtp status		(ver vtp)
 sh vtp password   (ver password)
 sh vlan
 ```
+
+### configuracion vtp client
+
+``` ena
+conf ter
+vtp domain g6
+vtp password g6
+vtp version 2
+vtp mode client
+
+sh vtp status
+sh vtp password
+```
 ---
 
 **intervlan(principales)**    
@@ -160,23 +173,8 @@ name ServerDHCP1
 ---
     
 
-# configuracion para vtp client
 
-``` ena
-conf ter
-vtp domain g6
-vtp password g6
-vtp version 2
-vtp mode client
-
-sh vtp status
-sh vtp password
-```
-
----
-
-
-# MSW0
+**MSW0**
 **designar interfaces**
 ```    
 ena
@@ -218,8 +216,7 @@ exit
 do sh run
 ```
 
-**designar el acceso/trunk MSW0**
-MSW0:
+**designar el acceso/trunk**
 ```    
 conf t
 int g1/1/4
@@ -251,7 +248,7 @@ sh vlan brief
 WR
 ```
 
-# MSW1
+**MSW1**
 **designar interfaces**
 ```ena
 conf t
@@ -284,8 +281,8 @@ exit
 do sh run
 ```
 
-**designar el acceso/trunk MSW1**
-MSW1:
+
+**designar el acceso/trunk**
 ```conf t
 
 int g1/0/2
@@ -299,7 +296,7 @@ WR
 
 
 
-# MSW2:
+**MSW2**
 **designar interfaces**
 ```ena
 conf t
@@ -331,7 +328,7 @@ exit
 do sh run
 ```
 
-**designar el acceso/trunk MSW2**
+**designar el acceso/trunk**
 ```conf t
 
 int g0/2
@@ -344,7 +341,7 @@ WR
 
     
     
-# MSW3:
+**MSW3**
 **designar interfaces**
 ```ena
 conf t
@@ -372,7 +369,7 @@ exit
 do sh run
 ```
 
-**designar el acceso/trunk MSW3**
+**designar el acceso/trunk**
 ```conf t
 int g1/0/2
 switchport mode trunk
@@ -494,8 +491,175 @@ exit
 
 sh ip route
 wr
-```    
-    
+```   
+--- 
+# LACP
+
+
+**MSW2**
+```
+int range gig1/0/1-3
+switchport mode trunk
+switchport trunk allowed vlan 16,26
+
+int port-channel 1
+switchport mode trunk
+switchport trunk allowed vlan 16,26
+shutdown
+no shutdown
+
+int range gig1/0/1-3
+channel-group 1 mode active
+shutdown
+no shutdown
+```
+
+**MSW1**
+```
+int range gig1/0/1-3
+switchport mode trunk
+switchport trunk allowed vlan 16,26
+
+int port-channel 1
+switchport mode trunk
+switchport trunk allowed vlan 16,26
+shutdown
+no shutdown
+
+int range gig1/0/1-3
+channel-group 1 mode active
+shutdown
+no shutdown
+```
+**MSW4**
+```
+int range fa0/3-5
+switchport trunk encapsulation dot1q
+switchport trunk allowed vlan 16,26
+shutdown
+no shutdown
+
+int port-channel 1
+switchport trunk encapsulation dot1q
+switchport trunk allowed vlan 16,26
+shutdown
+no shutdown
+
+int fa0/3
+channel-group 1 mode active
+shutdown
+no shutdown
+
+int range fa0/4-5
+channel-group 1 mode passive
+shutdown
+no shutdown
+
+int range fa0/1-2
+switchport trunk encapsulation dot1q
+switchport trunk allowed vlan 16,26
+shutdown
+no shutdown
+```
+
+**MSW8**
+```
+int range fa0/3-5
+switchport trunk encapsulation dot1q
+switchport trunk allowed vlan 16,26
+
+int port-channel 1
+switchport trunk encapsulation dot1q
+switchport trunk allowed vlan 16,26
+shutdown
+no shutdown
+
+int fa0/3
+channel-group 1 mode active
+shutdown
+no shutdown
+
+int range fa0/4-5
+channel-group 1 mode passive
+shutdown
+no shutdown
+
+int range fa0/1-2
+switchport trunk encapsulation dot1q
+switchport trunk allowed vlan 16,26
+shutdown
+no shutdown
+```
+---
+# Access
+
+**SW0**
+```
+int fa0/3
+switchport mode trunk
+switchport trunk allowed vlan 26
+shutdown
+no shutdown
+
+int range fa0/1-2
+switchport mode access
+switchport access vlan 26
+shutdown
+no shutdown
+```
+
+
+**SW1**
+```
+int fa0/3
+switchport mode trunk
+switchport trunk allowed vlan 16
+shutdown
+no shutdown
+
+int range fa0/1-2
+switchport mode access
+switchport access vlan 16
+shutdown
+no shutdown
+```
+
+
+
+**SW2**
+```
+int fa0/3
+switchport mode trunk
+switchport trunk allowed vlan 16,26
+shutdown
+no shutdown
+
+int range fa0/1-2
+switchport mode access
+switchport access vlan 16
+shutdown
+no shutdown
+```
+
+
+
+**SW3**
+```
+int fa0/3
+switchport mode trunk
+switchport trunk allowed vlan 26
+shutdown
+no shutdown
+
+int range fa0/1-2
+switchport mode access
+switchport access vlan 26
+shutdown
+no shutdown
+```
+
+---
+
 # DHCP
 **Server DHCP1**
 ```
