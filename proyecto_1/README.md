@@ -78,6 +78,27 @@ ip: 192.168.26.?
 mask: 255.255.255.0
 gw: 192.168.26.1
 ```
+# **CONFIGURACIONES SERVIDORES 🖥**
+  
+### DHCP1 (informatica26) 🖥️
+```bash
+ip: 192.168.96.2
+mask: 255.255.255.0
+gw: 192.168.96.1
+```
+  
+### DHCP1 (Soporte 16) 🖥️
+```bash
+ip: 192.168.86.2
+mask: 255.255.255.0
+gw: 192.168.86.1
+```
+### SRVER2 (Pagina Web) 🖥️
+```bash
+ip: 192.168.16.?
+mask: 255.255.255.0
+gw: 192.168.16.1
+```
     
 # **Conexión entre los edificios**
     
@@ -127,6 +148,16 @@ vlan 76
 name C_LAN6
 ```
 ---
+  
+**Vlan Servidores DHCP**
+```    
+vlan 86
+name ServerDHCP2
+  
+vlan 96
+name ServerDHCP1
+```
+---
     
 
 # configuracion para vtp client
@@ -152,11 +183,13 @@ ena
 conf t
 int vlan 16
 ip address 192.168.16.1 255.255.255.0
+ip helper-address 192.168.86.2
 no shutdown
 exit
 
 int vlan 26
 ip address 192.168.26.1 255.255.255.0
+ip helper-address 192.168.96.2
 no shutdown
 exit
 ```
@@ -171,6 +204,16 @@ int vlan 46
 ip address 46.46.46.1 255.0.0.0
 no shutdown
 exit
+  
+int vlan 86
+ip add 192.168.86.1 255.255.255.0   
+no shutdown
+exit
+  
+int vlan 96
+ip add 192.168.96.1 255.255.255.0   
+no shutdown
+exit
 
 do sh run
 ```
@@ -179,15 +222,34 @@ do sh run
 MSW0:
 ```    
 conf t
-int g1/0/2
+int g1/1/4
 switchport mode trunk
 switchport trunk allowed vlan all
 exit
+  
+conf t
+int g1/1/1
+switchport mode trunk
+switchport trunk allowed vlan all
+exit
+  
+enable
+conf t
+int Gig1/0/2
+switchport mode access
+switchport  access vlan 86
+exit
+
+enable
+conf t
+int Gig1/0/1
+switchport mode access
+switchport  access vlan 96
+exit
+  
 sh vlan brief
 WR
 ```
-
-
 
 # MSW1
 **designar interfaces**
@@ -434,8 +496,77 @@ sh ip route
 wr
 ```    
     
-    
-    
+# DHCP
+**Server DHCP1**
+Pool name: informatica26
+default gw: 192.168.26.1
+start IP: 192.168.26.9
+Mask> 255.255.255.0
+Max number user: 100
+  
+**Server DHCP2**
+Pool name: informatica16
+default gw: 192.168.16.1
+start IP: 192.168.16.3
+Mask> 255.255.255.0
+Max number user: 100
+
+  
+  
+# Servidor WEB
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Redes 2</title>
+<style>
+		table {
+			background-color: lightblue;
+		}
+		td {
+			background-color: white;
+		}
+	</style>
+
+</head>
+<body>
+	<h1>Grupo # 6</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>No.</th>
+      <th>Carnet</th>
+      <th>Nombre</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1</td>
+      <td>201115018</td>
+      <td>Joel Rodríguez Santos</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>201700644</td>
+      <td>Javier Roberto Alfaro Vividor</td>
+    </tr>
+
+<tr>
+      <td>3</td>
+      <td>201709311</td>
+      <td>Edin Emanuel Montenegro Vasquez</td>
+    </tr>
+
+<tr>
+      <td>4</td>
+      <td>200915080</td>
+      <td>Julio Roberto Vasquez Santiago</td>
+    </tr>
+  </tbody>
+</table>
+
+</body>
+</html>
     
     
 ---
