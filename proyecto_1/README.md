@@ -496,6 +496,24 @@ wr
 # LACP
 
 
+**MSW1**
+```
+int range gig1/0/1-3
+switchport mode trunk
+switchport trunk allowed vlan 16,26
+
+int port-channel 1
+switchport mode trunk
+switchport trunk allowed vlan 16,26
+shutdown
+no shutdown
+
+int range gig1/0/1-3
+channel-group 1 mode active
+shutdown
+no shutdown
+```
+
 **MSW2**
 ```
 int range gig1/0/1-3
@@ -514,23 +532,6 @@ shutdown
 no shutdown
 ```
 
-**MSW1**
-```
-int range gig1/0/1-3
-switchport mode trunk
-switchport trunk allowed vlan 16,26
-
-int port-channel 1
-switchport mode trunk
-switchport trunk allowed vlan 16,26
-shutdown
-no shutdown
-
-int range gig1/0/1-3
-channel-group 1 mode active
-shutdown
-no shutdown
-```
 **MSW4**
 ```
 int range fa0/3-5
@@ -561,32 +562,6 @@ switchport trunk allowed vlan 16,26
 shutdown
 no shutdown
 ```
-**MSW5**
-```
--- hsrp
-interface Vlan16
-standby 1 ip 192.168.16.100
-standby 1 priority 100
-interface Vlan26
-standby 2 ip 192.168.26.100
-standby 2 priority 100
-
-//comando para ver estado
-sh standby brief
-```
-**MSW6**
-```
--- hsrp
-interface Vlan16
-standby 1 ip 192.168.16.100
-standby 1 priority 110
-standby 1 preempt
-interface Vlan26
-standby 2 ip 192.168.26.100
-standby 2 priority 110
-standby 2 preempt
-```
-
 
 **MSW8**
 ```
@@ -616,13 +591,94 @@ switchport trunk allowed vlan 16,26
 shutdown
 no shutdown
 ```
-**MSW9**
+---
+
+# HSRP y resto de MSWs en distribución
+
+**MSW3**
 ```
--- hsrp
+int fa0/3
+switchport mode trunk
+switchport trunk allowed vlan 26
+shutdown
+no shutdown
+
+int range fa0/1-2
+switchport mode access
+switchport access vlan 26
+shutdown
+no shutdown
+```
+
+**MSW5**
+```
+int range fa0/1-2
+switchport trunk encapsulation dot1q
+switchport trunk allowed vlan 16,26
+switchport mode trunk
+shutdown
+no shutdown
+
+interface Vlan16
+standby 1 ip 192.168.16.100
+standby 1 priority 100
+
+interface Vlan26
+standby 2 ip 192.168.26.100
+standby 2 priority 100
+
+//comando para ver estado
+sh standby brief
+```
+**MSW6**
+```
+int range fa0/1-2
+switchport trunk encapsulation dot1q
+switchport trunk allowed vlan 16,26
+switchport mode trunk
+shutdown
+no shutdown
+
 interface Vlan16
 standby 1 ip 192.168.16.100
 standby 1 priority 110
 standby 1 preempt
+
+interface Vlan26
+standby 2 ip 192.168.26.100
+standby 2 priority 110
+standby 2 preempt
+```
+
+**MSW7**
+```
+int range fa0/1-4
+switchport mode trunk
+switchport trunk allowed vlan 16,26
+shutdown
+no shutdown
+```
+
+**MSW9**
+```
+int range fa0/3
+switchport trunk encapsulation dot1q
+switchport trunk allowed vlan 16,26
+switchport mode trunk
+shutdown
+no shutdown
+
+int range fa0/1
+switchport trunk encapsulation dot1q
+switchport trunk allowed vlan 16,26
+shutdown
+no shutdown
+
+interface Vlan16
+standby 1 ip 192.168.16.100
+standby 1 priority 110
+standby 1 preempt
+
 interface Vlan26
 standby 2 ip 192.168.26.100
 standby 2 priority 110
@@ -630,7 +686,13 @@ standby 2 preempt
 ```
 **MSW10**
 ```
--- hsrp
+int range fa0/1-2
+switchport trunk encapsulation dot1q
+switchport trunk allowed vlan 16,26
+switchport mode trunk
+shutdown
+no shutdown
+
 interface Vlan16
 standby 1 ip 192.168.16.100
 standby 1 priority 100
@@ -642,6 +704,15 @@ standby 2 priority 100
 sh standby brief
 ```
 
+
+**MSW11**
+```
+int range fa0/1-4
+switchport mode trunk
+switchport trunk allowed vlan 16,26
+shutdown
+no shutdown
+```
 
 ---
 # Access
@@ -710,6 +781,80 @@ switchport access vlan 26
 shutdown
 no shutdown
 ```
+
+# Port Security
+
+
+#### Direcciones
+|Mac-Address|SW|Port|
+|---|---|---|
+|0090.2B88.810C|SW4 |fa0/2|
+|0060.7063.7B9E|SW5 |fa0/1|
+|00D0.D323.B58E|SW6 |fa0/2|
+|000B.BE77.BE8E|SW7 |fa0/1|
+|0060.7038.D309|SW8 |fa0/2|
+|0001.977B.887E|SW9 |fa0/1|
+|0000.0C35.2985|SW10|fa0/2|
+|0060.3E47.59CC|SW11|fa0/1|
+
+
+**SW4**
+```
+int fa0/2
+switchport port-security
+switchport port-security mac-address 0090.2B88.810C
+```
+
+**SW5**
+```
+int fa0/1
+switchport port-security
+switchport port-security mac-address 0060.7063.7B9E
+```
+
+**SW6**
+```
+int fa0/2
+switchport port-security
+switchport port-security mac-address 00D0.D323.B58E
+```
+
+**SW7**
+```
+int fa0/1
+switchport port-security
+switchport port-security mac-address 000B.BE77.BE8E
+```
+
+**SW8**
+```
+int fa0/2
+switchport port-security
+switchport port-security mac-address 0060.7038.D309
+```
+
+**SW9**
+```
+int fa0/1
+switchport port-security
+switchport port-security mac-address 0001.977B.887E
+```
+
+**SW10**
+```  
+int fa0/2
+switchport port-security
+switchport port-security mac-address 0000.0C35.2985
+```  
+
+**SW11**
+```  
+int fa0/1
+switchport port-security
+switchport port-security mac-address 0060.3E47.59CC
+```  
+
+
 
 ---
 
@@ -804,6 +949,8 @@ OSPF se caracteriza por su capacidad para calcular la ruta más corta para el tr
 EIGRP es un protocolo de enrutamiento dinámico que utiliza el algoritmo de distancia vector para determinar la ruta más corta a los destinos de la red.
 ## LACP
 El enlace de canal de agrupación (LACP) es un protocolo de enrutamiento que permite a los dispositivos de red agrupar múltiples enlaces de red en un solo enlace de red virtual.
+## Port Security
+Protocolo que crear políticas de seguridad en capa 2 en donde se toma en cuenta la dirección MAC de los dispositivos finales, permitiendo la comunicación solo desde dispositivos registrados en el protocolo.
 # VER CONFIGURACIONES DE LOS SWITCHES ⌨️
 ### VER VLANS
 ```bash
@@ -822,7 +969,10 @@ do sh ip ospf neighbor
 do sh ip ospf database router
 ```
 
-
+### VER CONFIGURACIÓN DE PORT SECURITY
+```bash
+do sh port-security int #INTERFACE
+```
 
 
 
