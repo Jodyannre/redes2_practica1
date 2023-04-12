@@ -19,7 +19,7 @@
 
 # CONFIGURACION GENERAL DE TOPOLOGIA 🖧
 <image
-  src="./Images/topo.png"
+  src="./Imagenes/Topologia.png"
   alt="Imagen de topologia"
   caption="Topología práctica 2">
 
