@@ -14,14 +14,8 @@
 | 200915080 | Julio Roberto Vasquez Santiago  |
 
 
-
-  
-
 # CONFIGURACION GENERAL DE TOPOLOGIA 🖧
-<image
-  src="./Imagenes/Topologia.png"
-  alt="Imagen de topologia"
-  caption="Topología práctica 2">
+![topologia](./Imagenes/Topologia.png)
 
 # **CONFIGURACIONES DE PC 🖥**
 ### PC1 (soporte6) 🖥️
