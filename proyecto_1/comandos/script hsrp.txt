@@ -1,0 +1,213 @@
+------------ MSW4 -----------------------------
+configure terminal
+vlan 16
+name SOPORTE6
+exit
+interface vlan 16
+ip address 192.168.16.1 255.255.255.0
+no shutdown
+exit
+interface range f0/1-2
+switchport trunk encapsulation dot1q
+switchport trunk allowed vlan 16,26
+exit
+
+vlan 26
+name INFORMATICA6
+exit
+interface vlan 26
+ip address 192.168.26.1 255.255.255.0
+no shutdown
+exit
+interface range f0/1-2
+switchport trunk encapsulation dot1q
+switchport trunk allowed vlan 26
+exit
+
+
+----------- MSW6 ----------------------
+configure terminal
+vlan 16
+name SOPORTE6
+exit
+interface vlan 16
+ip address 192.168.16.1 255.255.255.0
+no shutdown
+exit
+interface range f0/1-2
+switchport trunk encapsulation dot1q
+switchport trunk allowed vlan 16,26
+exit
+
+vlan 26
+name INFORMATICA6
+exit
+interface vlan 26
+ip address 192.168.26.1 255.255.255.0
+no shutdown
+exit
+interface range f0/1-2
+switchport trunk encapsulation dot1q
+switchport trunk allowed vlan 16,26
+exit
+
+-- hsrp
+interface Vlan16
+standby 1 ip 192.168.16.100
+standby 1 priority 110
+standby 1 preempt
+interface Vlan26
+standby 2 ip 192.168.26.100
+standby 2 priority 110
+standby 2 preempt
+
+----------- MSW5 ----------------------
+configure terminal
+vlan 16
+name SOPORTE6
+exit
+interface vlan 16
+ip address 192.168.16.1 255.255.255.0
+no shutdown
+exit
+interface range f0/1-2
+switchport trunk encapsulation dot1q
+switchport trunk allowed vlan 16
+exit
+
+vlan 26
+name INFORMATICA6
+exit
+interface vlan 26
+ip address 192.168.26.1 255.255.255.0
+no shutdown
+exit
+interface range f0/1-2
+switchport trunk encapsulation dot1q
+switchport trunk allowed vlan 26
+exit
+
+
+-- hsrp
+interface Vlan16
+standby 1 ip 192.168.16.100
+standby 1 priority 100
+interface Vlan26
+standby 2 ip 192.168.26.100
+standby 2 priority 100
+//comando para ver estado
+sh standby brief
+
+
+------------ MSW7 -----------------------------
+configure terminal
+vlan 16
+name SOPORTE6
+exit
+interface vlan 16
+ip address 192.168.16.1 255.255.255.0
+no shutdown
+exit
+interface range f0/3-4
+switchport trunk encapsulation dot1q
+switchport trunk allowed vlan 16
+exit
+
+vlan 26
+name INFORMATICA6
+exit
+interface vlan 26
+ip address 192.168.26.1 255.255.255.0
+no shutdown
+exit
+interface range f0/3-4
+switchport trunk encapsulation dot1q
+switchport trunk allowed vlan 26
+exit
+
+interface range f0/1
+switchport trunk encapsulation dot1q
+switchport trunk allowed vlan 16
+exit
+
+interface range f0/1
+switchport trunk encapsulation dot1q
+switchport trunk allowed vlan 26
+exit
+
+------------ SW0 -----------------------------
+interface f0/3
+switchport trunk allowed vlan 26
+switchport mode trunk
+exit
+interface range f0/1-2
+description access
+switchport access vlan 26
+switchport mode access
+exit
+------------ SW1 -----------------------------
+interface f0/3
+switchport trunk allowed vlan 16
+switchport mode trunk
+exit
+interface range f0/1-2
+description access
+switchport access vlan 16
+switchport mode access
+exit
+
+
+------------ MSW8 -----------------------------
+interface vlan 16
+ip address 192.168.16.1 255.255.255.0
+no shutdown
+exit
+interface vlan 26
+ip address 192.168.26.1 255.255.255.0
+no shutdown
+exit
+------------ MSW9 -----------------------------
+interface vlan 16
+ip address 192.168.16.1 255.255.255.0
+no shutdown
+exit
+interface vlan 26
+ip address 192.168.26.1 255.255.255.0
+no shutdown
+exit
+-- hsrp
+interface Vlan16
+standby 1 ip 192.168.16.100
+standby 1 priority 110
+standby 1 preempt
+interface Vlan26
+standby 2 ip 192.168.26.100
+standby 2 priority 110
+standby 2 preempt
+------------ MSW10 -----------------------------
+interface vlan 16
+ip address 192.168.16.1 255.255.255.0
+no shutdown
+exit
+interface vlan 26
+ip address 192.168.26.1 255.255.255.0
+no shutdown
+exit
+-- hsrp
+interface Vlan16
+standby 1 ip 192.168.16.100
+standby 1 priority 100
+interface Vlan26
+standby 2 ip 192.168.26.100
+standby 2 priority 100
+//comando para ver estado
+sh standby brief
+------------ MSW11 -----------------------------
+interface vlan 16
+ip address 192.168.16.1 255.255.255.0
+no shutdown
+exit
+interface vlan 26
+ip address 192.168.26.1 255.255.255.0
+no shutdown
+exit

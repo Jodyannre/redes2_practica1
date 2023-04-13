@@ -1,0 +1,327 @@
+Distribución 1
+-------------------------------------------------
+MSW2
+-------------------------------------------------
+vtp domain g6
+vtp password g6
+vtp version 2
+vtp mode client
+
+int range gig1/0/1-3
+switchport mode trunk
+switchport trunk allowed vlan 16,26
+
+int port-channel 1
+switchport mode trunk
+switchport trunk allowed vlan 16,26
+shutdown
+no shutdown
+
+int range gig1/0/1-3
+channel-group 1 mode active
+shutdown
+no shutdown
+-------------------------------------------------
+MSW8
+-------------------------------------------------
+vtp domain g6
+vtp password g6
+vtp version 2
+vtp mode client
+
+
+int range fa0/3-5
+switchport trunk encapsulation dot1q
+switchport trunk allowed vlan 16,26
+
+int port-channel 1
+switchport trunk encapsulation dot1q
+switchport trunk allowed vlan 16,26
+shutdown
+no shutdown
+
+int range fa0/3-5
+channel-group 1 mode active
+shutdown
+no shutdown
+
+
+int range fa0/1-2
+switchport trunk encapsulation dot1q
+switchport trunk allowed vlan 16,26
+shutdown
+no shutdown
+
+-------------------------------------------------
+MSW10
+-------------------------------------------------
+vtp domain g6
+vtp password g6
+vtp version 2
+vtp mode client
+
+
+int range fa0/1-2
+switchport trunk encapsulation dot1q
+switchport trunk allowed vlan 16,26
+switchport mode trunk
+shutdown
+no shutdown
+
+-------------------------------------------------
+MSW9
+-------------------------------------------------
+vtp domain g6
+vtp password g6
+vtp version 2
+vtp mode client
+
+int range fa0/3
+switchport trunk encapsulation dot1q
+switchport trunk allowed vlan 16,26
+switchport mode trunk
+shutdown
+no shutdown
+
+int range fa0/1
+switchport trunk encapsulation dot1q
+switchport trunk allowed vlan 16,26
+shutdown
+no shutdown
+
+
+-------------------------------------------------
+MSW11
+-------------------------------------------------
+vtp domain g6
+vtp password g6
+vtp version 2
+vtp mode client
+
+
+int range fa0/1-4
+switchport mode trunk
+switchport trunk allowed vlan 16,26
+shutdown
+no shutdown
+
+
+-------------------------------------------------
+SW2
+-------------------------------------------------
+vtp domain g6
+vtp password g6
+vtp version 2
+vtp mode client
+
+
+int fa0/3
+switchport mode trunk
+switchport trunk allowed vlan 16,26
+shutdown
+no shutdown
+
+int range fa0/1-2
+switchport mode access
+switchport access vlan 16
+shutdown
+no shutdown
+
+
+
+-------------------------------------------------
+SW3
+-------------------------------------------------
+vtp domain g6
+vtp password g6
+vtp version 2
+vtp mode client
+
+
+int fa0/3
+switchport mode trunk
+switchport trunk allowed vlan 26
+shutdown
+no shutdown
+
+int range fa0/1-2
+switchport mode access
+switchport access vlan 26
+shutdown
+no shutdown
+
+
+
+
+
+
+****************************************************************
+////////////////////////////////////////////////////////////////
+****************************************************************
+Distribución 2
+-------------------------------------------------
+MSW1
+-------------------------------------------------
+vtp domain g6
+vtp password g6
+vtp version 2
+vtp mode client
+
+
+int range gig1/0/1-3
+switchport mode trunk
+switchport trunk allowed vlan 16,26
+
+int port-channel 1
+switchport mode trunk
+switchport trunk allowed vlan 16,26
+shutdown
+no shutdown
+
+int range gig1/0/1-3
+channel-group 1 mode active
+shutdown
+no shutdown
+-------------------------------------------------
+MSW4
+-------------------------------------------------
+vtp domain g6
+vtp password g6
+vtp version 2
+vtp mode client
+
+
+int range fa0/3-5
+switchport trunk encapsulation dot1q
+switchport trunk allowed vlan 16,26
+shutdown
+no shutdown
+
+int port-channel 1
+switchport trunk encapsulation dot1q
+switchport trunk allowed vlan 16,26
+shutdown
+no shutdown
+
+int range fa0/3-5
+channel-group 1 mode active
+shutdown
+no shutdown
+
+
+int range fa0/1-2
+switchport trunk encapsulation dot1q
+switchport trunk allowed vlan 16,26
+shutdown
+no shutdown
+
+-------------------------------------------------
+MSW6
+-------------------------------------------------
+vtp domain g6
+vtp password g6
+vtp version 2
+vtp mode client
+
+
+int range fa0/1-2
+switchport trunk encapsulation dot1q
+switchport trunk allowed vlan 16,26
+switchport mode trunk
+shutdown
+no shutdown
+
+-------------------------------------------------
+MSW5
+-------------------------------------------------
+vtp domain g6
+vtp password g6
+vtp version 2
+vtp mode client
+
+int range fa0/1-2
+switchport trunk encapsulation dot1q
+switchport trunk allowed vlan 16,26
+switchport mode trunk
+shutdown
+no shutdown
+
+
+-------------------------------------------------
+MSW7
+-------------------------------------------------
+vtp domain g6
+vtp password g6
+vtp version 2
+vtp mode client
+
+
+int range fa0/1-4
+switchport mode trunk
+switchport trunk allowed vlan 16,26
+shutdown
+no shutdown
+
+
+-------------------------------------------------
+SW0
+-------------------------------------------------
+vtp domain g6
+vtp password g6
+vtp version 2
+vtp mode client
+
+int fa0/3
+switchport mode trunk
+switchport trunk allowed vlan 26
+shutdown
+no shutdown
+
+int range fa0/1-2
+switchport mode access
+switchport access vlan 26
+shutdown
+no shutdown
+
+
+-------------------------------------------------
+SW1
+-------------------------------------------------
+vtp domain g6
+vtp password g6
+vtp version 2
+vtp mode client
+
+int fa0/3
+switchport mode trunk
+switchport trunk allowed vlan 16
+shutdown
+no shutdown
+
+int range fa0/1-2
+switchport mode access
+switchport access vlan 16
+shutdown
+no shutdown
+
+-------------------------------------------------
+MSW1
+-------------------------------------------------
+int port-channel 1
+shutdown
+no shutdown
+
+int range gig1/0/1-3
+shutdown
+no shutdown
+-------------------------------------------------
+MSW4
+-------------------------------------------------
+
+int port-channel 1
+shutdown
+no shutdown
+
+int range fa0/3-5
+shutdown
+no shutdown
