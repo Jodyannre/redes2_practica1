@@ -15,7 +15,7 @@
 
 
 # CONFIGURACION GENERAL DE TOPOLOGIA 🖧
-![topologia](./Imagenes/Topologia.png)
+![topologia](./Imagenes/topologia.png)
 
 # **CONFIGURACIONES DE PC 🖥**
 ### PC1 (soporte6) 🖥️
