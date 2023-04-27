@@ -16,195 +16,119 @@ import {
 } from "recharts";
 
 
-var dolar = [10, 25, 89, 44, 55, 66, 12, 77, 89, 44, 55, 77, 11, 23, 56, 40, 50, 51, 52, 53, 60, 59, 58, 57, 55, 52, 45, 35, 45, 55, 65, 75, 76];
-var euro = [15, 30, 92, 45, 56, 55, 56, 57, 58, 59, 60, 61, 51, 41, 45, 55, 65, 75, 85, 95, 75, 70, 65, 60, 55, 45, 55, 65, 75, 76, 77, 78, 81];
-var cerberus = [25, 26, 27, 44, 55, 44, 45, 45, 46, 47, 48, 47, 46, 45, 42, 45, 50, 55, 65, 75, 76, 77, 79, 82, 85, 87, 89, 88, 78, 68, 58, 48, 38];
-
-/*
-console.log("---------------------")
-console.log(dolar.length)
-console.log(euro.length)
-console.log(cerberus.length)*/
-
-
-const data_barras = [
-    {
-        name: "Enero",
-        uv: 4000
-    },
-    {
-        name: "Febrero",
-        uv: 3000
-    },
-    {
-        name: "Marzo",
-        uv: 2000
-    },
-    {
-        name: "Abril",
-        uv: 2780
-    },
-    {
-        name: "Mayo",
-        uv: 1890
-    },
-    {
-        name: "Junio",
-        uv: 2390
-    },
-    {
-        name: "Julio",
-        uv: 3490
-    },
-    {
-        name: "Agosto",
-        uv: 2000
-    },
-    {
-        name: "Septiembre",
-        uv: 1900
-    },
-    {
-        name: "Octubre",
-        uv: 1500
-    },
-    {
-        name: "Noviembre",
-        uv: 2500
-    },
-    {
-        name: "Diciembre",
-        uv: 3490
-    }
-];
-
-
-const data_triple_economia = [
-
-    {
-        name: "2015",
-        DollarUSD: 3566,
-        CerberCoin: 5000,
-        Euro: 5400
-    },
-    {
-        name: "2016",
-        DollarUSD: 2000,
-        CerberCoin: 2400,
-        Euro: 2200
-    },
-    {
-        name: "2017",
-        DollarUSD: 4000,
-        CerberCoin: 2400,
-        Euro: 5400
-    },
-    {
-        name: "2018",
-        DollarUSD: 3000,
-        CerberCoin: 1398,
-        Euro: 2210
-    },
-    {
-        name: "2019",
-        DollarUSD: 2000,
-        CerberCoin: 9800,
-        Euro: 2290
-    },
-    {
-        name: "2020",
-        DollarUSD: 2780,
-        CerberCoin: 3908,
-        Euro: 2000
-    },
-    {
-        name: "2021",
-        DollarUSD: 1890,
-        CerberCoin: 4800,
-        Euro: 2181
-    },
-    {
-        name: "2022",
-        DollarUSD: 2390,
-        CerberCoin: 3800,
-        Euro: 2500
-    },
-    {
-        name: "2023",
-        DollarUSD: 3490,
-        CerberCoin: 4300,
-        Euro: 2100
-    }
-];
-
-/*
-const data_CerberusTop = [
-    {
-        name: "Cerberus exito bolsa",
-        uv: 590, //linea
-        pv: 590, //barra
-        amt: 590 //area
-    },
-    {
-        name: "Aumento ultimo año",
-        uv: 868,
-        pv: 868,
-        amt: 868
-    },
-    {
-        name: "Maximo valor alcanzado", //sacar el max value del array de cerberus
-        uv: 1397,
-        pv: 1397,
-        amt: 1397
-    }
-];*/
-
 export function ReporteEconomico() {
 
-
-    //[items, setItems]---------------------------------------------------------------------
-    const [data_CerberusTop, setData_CerberusTop] = useState([
+    const [data_Ctop, setdata_Ctop] = useState([
         { name: "Cerberus exito bolsa", uv: 60, pv: 60, amt: 60 },
         { name: "Aumento ultimo año", uv: 50, pv: 70, amt: 80 },
         { name: "Maximo valor alcanzado", uv: 70, pv: 80, amt: 90 }
     ]);
 
     const updateItem = (numero, numero2, numero3) => {
-        const updatedItems = [...data_CerberusTop];
+        const updatedItems = [...data_Ctop];
         updatedItems[0] = { ...updatedItems[0], uv: numero, pv: numero, amt: numero };
         updatedItems[1] = { ...updatedItems[1], uv: numero2, pv: numero2, amt: numero2 };
         updatedItems[2] = { ...updatedItems[2], uv: numero3, pv: numero3, amt: numero3 };
-        setData_CerberusTop(updatedItems);
-        //console.log(data_CerberusTop)
+        setdata_Ctop(updatedItems);
+        //console.log(data_Ctop)
     };
 
-    //---------------------------------------------------------------------------------------
+    //*******************************************************************************************************************
+    const [data_barras, setdata_barras] = useState([
+        { name: "Enero", uv: 100 },
+        { name: "Febrero", uv: 200 },
+        { name: "Marzo", uv: 300 },
+        { name: "Abril", uv: 400 },
+        { name: "Mayo", uv: 500 },
+        { name: "Junio", uv: 600 },
+        { name: "Julio", uv: 700 },
+        { name: "Agosto", uv: 800 },
+        { name: "Septiembre", uv: 900 },
+        { name: "Octubre", uv: 800 },
+        { name: "Noviembre", uv: 400 },
+        { name: "Diciembre", uv: 200 }
+    ]);
 
-    const metodo1 = () => {
-        console.log('Método 1');
+    const updateItem2 = (numero) => {
+        const updatedItems = [...data_barras];
+
+        for (let index = 0; index < data_barras.length; index++) {
+            updatedItems[index] = { ...updatedItems[index], uv: numero[index] };
+        }
+        setdata_barras(updatedItems);
+        //console.log(data_barras)
     };
 
-    const metodo2 = () => {
-        console.log('Método 2');
+    //*******************************************************************************************************************
+    const [data_triple_economia, setdata_triple_economia] = useState([
+        { name: "1991", DollarUSD: 65, CerberCoin: 50, Euro: 70 },
+        { name: "1992", DollarUSD: 65, CerberCoin: 50, Euro: 70 },
+        { name: "1993", DollarUSD: 65, CerberCoin: 50, Euro: 70 },
+        { name: "1994", DollarUSD: 65, CerberCoin: 50, Euro: 70 },
+        { name: "1995", DollarUSD: 65, CerberCoin: 50, Euro: 70 },
+        { name: "1996", DollarUSD: 65, CerberCoin: 60, Euro: 70 },
+        { name: "1997", DollarUSD: 65, CerberCoin: 60, Euro: 70 },
+        { name: "1998", DollarUSD: 65, CerberCoin: 60, Euro: 70 },
+        { name: "1999", DollarUSD: 65, CerberCoin: 60, Euro: 70 },
+        { name: "2000", DollarUSD: 65, CerberCoin: 60, Euro: 85 },
+        { name: "2001", DollarUSD: 65, CerberCoin: 60, Euro: 85 },
+        { name: "2002", DollarUSD: 65, CerberCoin: 60, Euro: 85 },
+        { name: "2003", DollarUSD: 65, CerberCoin: 70, Euro: 85 },
+        { name: "2004", DollarUSD: 65, CerberCoin: 70, Euro: 85 },
+        { name: "2005", DollarUSD: 65, CerberCoin: 70, Euro: 85 },
+        { name: "2006", DollarUSD: 65, CerberCoin: 70, Euro: 85 },
+        { name: "2007", DollarUSD: 65, CerberCoin: 70, Euro: 90 },
+        { name: "2008", DollarUSD: 65, CerberCoin: 70, Euro: 90 },
+        { name: "2009", DollarUSD: 65, CerberCoin: 70, Euro: 90 },
+        { name: "2010", DollarUSD: 65, CerberCoin: 70, Euro: 90 },
+        { name: "2011", DollarUSD: 95, CerberCoin: 80, Euro: 90 },
+        { name: "2012", DollarUSD: 95, CerberCoin: 80, Euro: 90 },
+        { name: "2013", DollarUSD: 95, CerberCoin: 80, Euro: 90 },
+        { name: "2014", DollarUSD: 95, CerberCoin: 80, Euro: 82 },
+        { name: "2015", DollarUSD: 95, CerberCoin: 80, Euro: 82 },
+        { name: "2016", DollarUSD: 95, CerberCoin: 80, Euro: 82 },
+        { name: "2017", DollarUSD: 95, CerberCoin: 80, Euro: 82 },
+        { name: "2018", DollarUSD: 95, CerberCoin: 80, Euro: 82 },
+        { name: "2019", DollarUSD: 95, CerberCoin: 80, Euro: 82 },
+        { name: "2020", DollarUSD: 95, CerberCoin: 75, Euro: 82 },
+        { name: "2021", DollarUSD: 95, CerberCoin: 75, Euro: 95 },
+        { name: "2022", DollarUSD: 95, CerberCoin: 75, Euro: 95 },
+        { name: "2023", DollarUSD: 95, CerberCoin: 75, Euro: 90 },
+    ]);
+
+    const updateItem3 = (usd, euro, cerberusC) => {
+        const updatedItems = [...data_triple_economia];
+
+        for (let index = 0; index < data_triple_economia.length; index++) {
+            updatedItems[index] = { ...updatedItems[index], DollarUSD: usd[index], CerberCoin: cerberusC[index], Euro: euro[index] };
+        }
+        setdata_triple_economia(updatedItems);
+        //console.log(data_triple_economia)
     };
 
-    const metodo3 = () => {
-        console.log('Método 3');
-    };
+
 
     //automaticamente================================================
 
     useEffect(() => {
-        updateItem(666, 555, 777);
+        //------------------------------- barras vertical
+        updateItem(666, 555, 777);//mongoDB 1era grafica
 
-        // primer método
-        metodo1();
+        //------------------------------- barras anual cerberus company
+        updateItem2([1200, 1100, 1000, 900, 800, 700, 600, 500, 400, 300, 200, 100])//mongoDB 2nda grafica
 
-        // segundo método
-        metodo2();
+        //------------------------------- usd vs euro vs ceberus coin (arrays de 33 items ojo)
+        const usd = Array.from({ length: 33 }, (_, i) => 1 + i * 1);
+        //console.log(usd);
 
-        // tercer método
-        metodo3();
+        const euro = Array.from({ length: 33 }, (_, i) => 2 + i * 2);
+        //console.log(euro);
+
+        const cerberusCoin = Array.from({ length: 33 }, (_, i) => 3 + i * 3);
+        //console.log(cerberusCoin);
+
+        updateItem3(usd,euro,cerberusCoin)//mongoDB 3era grafica
+
 
     }, []); // el segundo argumento del useEffect es un array vacío para que se ejecute solo una vez al cargar la página
 
@@ -281,7 +205,7 @@ export function ReporteEconomico() {
                             layout="vertical"
                             width={500}
                             height={400}
-                            data={data_CerberusTop}
+                            data={data_Ctop}
                             margin={{
                                 top: 20,
                                 right: 20,
@@ -300,13 +224,6 @@ export function ReporteEconomico() {
                         </ComposedChart>
                     </div>
                     <h2>Desarrollo Cerberus</h2>
-                    <button onClick={() => updateItem(0, 777)}></button>
-                    <br></br>
-                    <br></br>
-                    <br></br>
-                    <br></br>
-                    <br></br>
-                    <br></br>
                 </div>
             </div>
 
