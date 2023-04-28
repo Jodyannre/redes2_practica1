@@ -1,4 +1,5 @@
-
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 
 
 import Carousel from 'react-elastic-carousel';
@@ -12,6 +13,7 @@ const breakPoints = [
 ];
 
 //deben estar guardadas en mongoDB necesito 1 arrays mas en mongoDB 1 para funconesPublicas
+/*
 const imagenes = [
 
     { titulo: "Gastó 1.400 euros para mejorar su PC Gaming y no puede jugar a un juego de hace 20 años porque es insuficiente", descripcion: "Actualizar tu PC Gaming es, por norma general, el sueño de muchos de los jugadores que utilizan este sistema para disfrutar de sus títulos favoritos. Por ello, las series RTX 3000 y RTX 4000 de NVIDIA, por ejemplo, son algunas de las opciones favoritas de los jugadores que desean dar el salto. Sin embargo, en alguna que otra ocasión estos se topan con conflictos inesperados que, aunque hayan gastado más de 1.000 euros en actualizar su equipo, no tienen una solución sencilla." },
@@ -21,11 +23,52 @@ const imagenes = [
     { titulo: "¿Cuáles son las carreras que más estudian los guatemaltecos en la Usac?", descripcion: "Hay más de una decena de universidades en Guatemala y muchas más opciones de estudios, pero solo hay una estatal. La Universidad de San Carlos de Guatemala (Usac) tiene un aproximado de 230 mil estudiantes matriculados y el 51 por ciento están en la capital.\nDel 2019 al 2022 la matrícula en el campus central ha tenido altas y bajas, pero predomina un aumento de inscripciones durante los años de pandemia. De 110 mil inscritos para el primer año en el 2019, pasó a 106 mil para el 2020 y luego comenzó a incrementarse el interés y para el 2022 eran 118 mil los estudiantes activos en esa casa de estudios." },
 
 
-];
+];*/
 
 
 
 export function FuncPublica() {
+
+    const [imagenes, setData] = useState([
+
+        { titulo: "?????????????????????", descripcion: "????????   ???????????????   ?????????????????" },
+        { titulo: "?????????????????????", descripcion: "????????   ???????????????   ?????????????????" },
+        { titulo: "?????????????????????", descripcion: "????????   ???????????????   ?????????????????" },
+        { titulo: "?????????????????????", descripcion: "????????   ???????????????   ?????????????????" },
+        { titulo: "?????????????????????", descripcion: "????????   ???????????????   ?????????????????" }
+    
+    ]);
+
+
+
+    const [func, setData2] = useState([
+
+        { nombre:"waifu1",descripcion:"(*u*)",imagen:"https://muyadictivo.com/wp-content/uploads/2022/07/significado-de-waifu-221.webp" },
+        { nombre:"waifu2",descripcion:"(*o*)",imagen:"https://openseauserdata.com/files/da7db003ab5c3a427efd1778af4b148a.jpg" },
+        { nombre:"waifu3",descripcion:"(*u*)",imagen:"https://muyadictivo.com/wp-content/uploads/2022/07/significado-de-waifu-221.webp" },
+        { nombre:"waifu4",descripcion:"(*o*)",imagen:"https://openseauserdata.com/files/da7db003ab5c3a427efd1778af4b148a.jpg" }
+    
+    ]);
+
+    //getFuncPub
+
+    useEffect(() => {
+        const fetchData = async () => {
+          const result = await axios.get("http://localhost:5000/getNoticias");
+          console.log("xxxxxxxxx")
+          console.log(result.data)
+          setData(result.data);
+
+
+          const result2 = await axios.get("http://localhost:5000/getARRAY");// no funciona
+          console.log("ooooooo")
+          console.log(result2.data)
+          //setData2(result2.data);
+        };
+    
+        fetchData();
+      }, []);
+      
 
     return (
         <div>
@@ -40,9 +83,9 @@ export function FuncPublica() {
                     <div class="col text-center">
                         <div className="card" style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
                             <div className="info">
-                                <h6><strong>Funcion</strong></h6>
-                                <h6>imagen.jpf</h6>
-                                <img src="https://openseauserdata.com/files/da7db003ab5c3a427efd1778af4b148a.jpg" alt="grupo 6 redes2" style={{ borderRadius: "50%",width: "40%", height: "40%" }} />
+                                <h6><strong>{func[0].nombre}</strong></h6>
+                                <h6>{func[0].descripcion}</h6>
+                                <img src={func[0].imagen} alt="grupo 6 redes2" style={{ borderRadius: "50%",width: "40%", height: "40%" }} />
                             
                             </div>
                         </div>
@@ -50,10 +93,9 @@ export function FuncPublica() {
                     <div class="col text-center">
                     <div className="card" style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
                             <div className="info">
-                                <h6><strong>Funcion 2</strong></h6>
-                                <h6>imagen2.jpf</h6>
-                                <img src="https://openseauserdata.com/files/da7db003ab5c3a427efd1778af4b148a.jpg" alt="grupo 6 redes2" style={{ borderRadius: "50%",width: "40%", height: "40%" }} />
-                            
+                            <h6><strong>{func[1].nombre}</strong></h6>
+                                <h6>{func[1].descripcion}</h6>
+                                <img src={func[1].imagen} alt="grupo 6 redes2" style={{ borderRadius: "50%",width: "40%", height: "40%" }} />
                             </div>
                         </div>
                     </div>
@@ -65,20 +107,18 @@ export function FuncPublica() {
                     <div class="col text-center">
                     <div className="card" style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
                             <div className="info">
-                                <h6><strong>Funcion3</strong></h6>
-                                <h6>imagen3.jpf</h6>
-                                <img src="https://openseauserdata.com/files/da7db003ab5c3a427efd1778af4b148a.jpg" alt="grupo 6 redes2" style={{ borderRadius: "50%",width: "40%", height: "40%" }} />
-                            
+                            <h6><strong>{func[3].nombre}</strong></h6>
+                                <h6>{func[3].descripcion}</h6>
+                                <img src={func[3].imagen} alt="grupo 6 redes2" style={{ borderRadius: "50%",width: "40%", height: "40%" }} />
                             </div>
                         </div>
                     </div>
                     <div class="col text-center">
                     <div className="card" style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
                             <div className="info">
-                                <h6><strong>Funcion4</strong></h6>
-                                <h6>imagen4.jpf</h6>
-                                <img src="https://openseauserdata.com/files/da7db003ab5c3a427efd1778af4b148a.jpg" alt="grupo 6 redes2" style={{ borderRadius: "50%",width: "40%", height: "40%" }} />
-                            </div>
+                            <h6><strong>{func[2].nombre}</strong></h6>
+                                <h6>{func[2].descripcion}</h6>
+                                <img src={func[2].imagen} alt="grupo 6 redes2" style={{ borderRadius: "50%",width: "40%", height: "40%" }} /> </div>
                         </div>
                     </div>
                 </div>

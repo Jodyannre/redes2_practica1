@@ -48,6 +48,34 @@ const modelo1 = new mongoose.Schema({
   
   // Crea el modelo para la colección
   const Proyecto3 = mongoose.model('fondos', modelo1);
+
+
+
+
+    //-----------------------------------
+// Define el esquema para la colección
+const modelo2 = new mongoose.Schema({
+    titulo: String,
+    descripcion: String
+  });
+  
+  // Crea el modelo para la colección
+  const Proyecto4 = mongoose.model('proyecto2_redes2_noticias', modelo2);
+
+
+
+
+  
+// YA NO FUNCIONA------------------------
+
+// Define el esquema para la colección
+const proyectoSchemaZ = new mongoose.Schema({
+    tipo: String,
+    valor: [Number]
+  });
+  
+  // Crea el modelo para la colección
+  const Proyecto666 = mongoose.model('hulk', proyectoSchemaZ);
   
 
 
@@ -61,6 +89,10 @@ const cors = require('cors');
 app.use(cors({
     origin: '*'
 }));
+
+
+
+
 
 app.get('/', function(req, res)
 {
@@ -107,6 +139,48 @@ app.get('/getDevops', async (req, res) => {
           res.status(500).send('Error en el servidor');
         }
       });
+
+
+
+      //getNoticias
+      app.get('/getNoticias', async (req, res) => {
+        try {
+          const proyectos0 = await Proyecto4.find({});
+          console.log("getNoticias!")
+          console.log(proyectos0)
+          res.send(proyectos0);
+        } catch (err) {
+          console.error(err);
+          res.status(500).send('Error en el servidor');
+        }
+      });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      app.get('/getARRAY', async (req, res) => {
+        try {
+          const proyectos = await Proyecto666.find({}).exec(); // agrega ".exec()" para resolver la promesa
+          console.log("getARRAY!")
+          console.log(proyectos)
+          res.send(proyectos);
+        } catch (err) {
+          console.error(err);
+          res.status(500).send('Error en el servidor');
+        }
+      });
+      
+
 
 
 app.listen
