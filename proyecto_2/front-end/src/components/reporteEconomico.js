@@ -1,4 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+
 import {
     BarChart,
     Bar,
@@ -106,28 +108,57 @@ export function ReporteEconomico() {
         //console.log(data_triple_economia)
     };
 
+    //=======================================================================================================================================
+    const [data, setData] = useState([
+
+        {tipo:"dolar",valor:[10,25,89,44,55,66,12,77,89,44,55,77,11,23,56,40,50,51,52,53,60,59,58,57,55,52,45,35,45,55,65,75,666]},
+        {tipo:"euro",valor:[15,30,92,45,56,55,56,57,58,59,60,61,51,41,45,55,65,75,85,95,75,70,65,60,55,45,55,65,75,76,77,78,666]},
+        {tipo:"cerberCoin",valor:[25,26,27,44,55,44,45,45,46,47,48,47,46,45,42,45,50,55,65,75,76,77,79,82,85,87,89,88,78,68,58,48,666]},
+        {tipo:"cerberCoin a travez del tiempo",valor:[750,26,27,500,55,44,45,45,46,666,48,47,46,45,42,45,5000,55,65,75,76,77,8000,82,85,87,666,88,78,68,58,48,666]}
+
+         ]);
+
+
+
 
 
     //automaticamente================================================
 
     useEffect(() => {
         //------------------------------- barras vertical
-        updateItem(666, 555, 777);//mongoDB 1era grafica
+        updateItem(111, 555, 777);//mongoDB 1era grafica
 
         //------------------------------- barras anual cerberus company
-        updateItem2([1200, 1100, 1000, 900, 800, 700, 600, 500, 400, 300, 200, 100])//mongoDB 2nda grafica
+        updateItem3(data[0].valor,data[1].valor,data[2].valor)//mongoDB 3era grafica
+          updateItem2([data[3].valor[0], data[3].valor[1], data[3].valor[2],  data[3].valor[3],  data[3].valor[4],  data[3].valor[5],  data[3].valor[6],  data[3].valor[7], data[3].valor[8], data[3].valor[9], data[3].valor[10], data[3].valor[11]])//mongoDB 2nda grafica
+        
 
-        //------------------------------- usd vs euro vs ceberus coin (arrays de 33 items ojo)
-        const usd = Array.from({ length: 33 }, (_, i) => 1 + i * 1);
-        //console.log(usd);
 
-        const euro = Array.from({ length: 33 }, (_, i) => 2 + i * 2);
-        //console.log(euro);
 
-        const cerberusCoin = Array.from({ length: 33 }, (_, i) => 3 + i * 3);
-        //console.log(cerberusCoin);
+        //DTOS DE MONGO
+        const fetchData = async () => {
+            const result = await axios.get("http://localhost:5000/getFuncsF");
+            console.log("xxxxxxxxx")
+            console.log(result.data)
+            //setData(result.data);
 
-        updateItem3(usd,euro,cerberusCoin)//mongoDB 3era grafica
+        updateItem3(result.data[0].valor,result.data[1].valor,result.data[2].valor)//mongoDB 3era grafica
+        updateItem2([result.data[3].valor[0], result.data[3].valor[1], result.data[3].valor[2],  result.data[3].valor[3],  result.data[3].valor[4],  result.data[3].valor[5],  result.data[3].valor[6],  result.data[3].valor[7], result.data[3].valor[8], result.data[3].valor[9], result.data[3].valor[10], result.data[3].valor[11]])//mongoDB 2nda grafica
+        
+
+
+        const result2 = await axios.get("http://localhost:5000/getFuncsF222");
+            console.log("nnnnnnnnn")
+            console.log(result2.data)
+            //setData(result.data);
+            updateItem(result2.data[0].valor, result2.data[1].valor, result2.data[2].valor);//mongoDB 1era grafica
+
+
+          };
+      
+          fetchData();
+
+          
 
 
     }, []); // el segundo argumento del useEffect es un array vacío para que se ejecute solo una vez al cargar la página

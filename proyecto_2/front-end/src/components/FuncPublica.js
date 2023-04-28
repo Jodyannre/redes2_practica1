@@ -60,10 +60,10 @@ export function FuncPublica() {
           setData(result.data);
 
 
-          const result2 = await axios.get("http://localhost:5000/getARRAY");// no funciona
-          console.log("ooooooo")
+          const result2 = await axios.get("http://localhost:5000/getFuncs");// no funciona
+          console.log("mmmmmmmmmmmmmmmmmmmm")
           console.log(result2.data)
-          //setData2(result2.data);
+          setData2(result2.data);
         };
     
         fetchData();
@@ -77,6 +77,8 @@ export function FuncPublica() {
             <br></br>
             <br></br>
             <h1 style={{ textAlign: "center" }}>Funcion publica</h1>
+            <br></br>
+            <br></br>
 
             <div>
                 <div class="row">
@@ -124,6 +126,10 @@ export function FuncPublica() {
                 </div>
             </div>
 
+            <br></br>
+            <br></br>
+            <br></br>
+            <br></br>
             <br></br>
             <br></br>
             <br></br>
