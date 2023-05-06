@@ -25,6 +25,7 @@
     * [Elastic Load Balancer](#elastic-load-balancer)
     * [Route 53](#route-53)
     * [Configuración de dominio](#configuración-de-dominio)
+    * [Configuración de Base de Datos](#mongodb)
 * [Vistas web](#vistas-web)
 
 ---
@@ -69,14 +70,18 @@ Se creo un security group para agrupar las reglas de entrada y salida válidad y
 Las reglas de entrada y salida configuradas para las peticiones y para la conexión SSH son las motradas en la imagen. Los servidores de la página web se encuentran funcionando en el puerto 3000.
 
 ---
-![ec2](./images/ec25.png)
+## MongoDB
+
+![mongo](./images/ec25.png)
  Se crea servidor  de BD para Mongo DB, para el manejo de informacion de las diversas entidades. En la imagen se pueden observar las caracteristicas.
-![ec2](./images/ec26.png)
+![mongo](./images/ec26.png)
 En la imagen se puede observar a detalle de la instancia, tipo de imagen utilizado, la cual por conveniencia se utilizo ubuntu 22.04, esto es escalabl, y en cualquier momnto se pude modificar ciertas caractristicas que sean necesaria.
-![ec2](./images/ec27.png)
+![mongo](./images/ec27.png)
 Se genero un grupo de seguridad  para agrupar las reglas de entrada y salida válidad y configuradas en las EC2.
-![ec2](./images/ec28.png)
- Las reglas se pueden observar en la imagen,son necesarias para por seguridad.
+![mongo](./images/ec28.png)
+Las reglas se pueden observar en la imagen, son necesarias para por seguridad y para dejar pasar el tráfico en el puerto que utiliza mongodb.
+![mongo](./images/dockerMongo.png)
+Finalmente la base de datos de mongodb fue montada en un contenedor de docker utilizando la imagen oficial de la última versión de mongo y su puerto por defecto, configurado también anteriormente en las reglas de los security groups en aws.
  
 ---
 
